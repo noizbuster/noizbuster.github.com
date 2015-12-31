@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # jekyll-mdl
 > A Jekyll theme based in Google Material Design Lite library.
 
@@ -74,3 +75,7 @@ Copyright © 2015 [Google Developers Group Managua](http://www.gdgmanagua.org).
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/gdg-managua/jekyll-mdl/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
+=======
+# noizbuster.github.com
+noizbuster's jekyll blog
+>>>>>>> d0485c06ab62f7dc8133edc98c0a6a584332a928
