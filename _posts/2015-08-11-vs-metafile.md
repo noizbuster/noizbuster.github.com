@@ -4,6 +4,7 @@ title:  "VS 프로젝트 공유시 제외해야할 파일들"
 date:   2015-12-14 00:06:00
 categories: Development
 author: NoizBuster
+highlight: false
 image: https://40.media.tumblr.com/efb92b8cbb6741ffa5ce92e885ce6a83/tumblr_inline_nr5dqmvXlY1sif8wc_540.png
 ---
 git이나 svn으로 혹은 어딘가에 제출할때 IDE 의 메타데이터나 로컬 설정파일들은 제외하는것이 좋다.
