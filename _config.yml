@@ -30,4 +30,5 @@ disqus: false
 disqus_shortname: 'Noiz'
 
 # Build settings
-markdown: kramdown
+gems: ['jekyll-commonmark']
+markdown: CommonMark
