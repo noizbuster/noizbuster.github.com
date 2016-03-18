@@ -16,6 +16,8 @@ post_type: highlight    # values [ highlight, default ]
 pagination_type: default  # values [ ops, default ]
 highlighter: pygments
 
+# pages: ./_static_pages
+
 more_vert:
   option1:
     name: NoizBuster's Naver Blog

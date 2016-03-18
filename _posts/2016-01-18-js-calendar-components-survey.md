@@ -1,3 +1,21 @@
+---
+
+layout: post
+
+title:  "js calendar-componenets-survey"
+
+date:   2016-01-18 00:00:00
+
+categories: ROS
+
+author: NoizBuster
+
+highlight: false
+
+image: http://wiki.ros.org/jade?action=AttachFile&do=get&target=jade.png
+
+---
+
 #Schedule Viewer
 
 Ubuntu 14.04
@@ -31,4 +49,3 @@ JobQueue : Celery(python) with MongoDB(Broker)
 - http://sigmajs.org/
 - http://visjs.org/
 - https://plot.ly/javascript
-

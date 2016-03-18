@@ -1,3 +1,21 @@
+---
+
+layout: post
+
+title:  "react-vs-angular2"
+
+date:   2016-01-18 00:00:00
+
+categories: ROS
+
+author: NoizBuster
+
+highlight: false
+
+image: http://wiki.ros.org/jade?action=AttachFile&do=get&target=jade.png
+
+---
+
 #MEAN VS MERN
 ###AngularJS 2.0 VS ReactJS
 

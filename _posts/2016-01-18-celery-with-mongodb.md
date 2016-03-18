@@ -1,3 +1,20 @@
+---
+
+layout: post
+
+title:  "celery with mongodb"
+
+date:   2016-01-18 00:00:00
+
+categories: ROS
+
+author: NoizBuster
+
+highlight: false
+
+image: http://wiki.ros.org/jade?action=AttachFile&do=get&target=jade.png
+
+---
 #Celery 와 Mongo DB를 이용한 튜토리얼
 
 참고링크  
