@@ -1,17 +1,17 @@
 ---
-layout: post
 title: 'VS 프로젝트 공유시 제외해야할 파일들'
 date: 2015-12-14 00:06:00
 categories: Development
 author: NoizBuster
 highlight: false
-image: /assets/images/wonwoo.jpg
+tag: [dev vs visualstudio]
+featimg: /assets/images/wonwoo.jpg
 
 ---
 git이나 svn으로 혹은 어딘가에 제출할때 IDE 의 메타데이터나 로컬 설정파일들은 제외하는것이 좋다.
 
 특히 VS의 경우 이런 메타데이터들의 크기가 크니 삭제하면 이래저래 많은 도움이 된다.
-
+![img-paste-20160318173237607.png](img-paste-20160318173237607.png)
 ![img](./wonwoo.jpg)
 
 ####공통으로 삭제해야 할 파일들

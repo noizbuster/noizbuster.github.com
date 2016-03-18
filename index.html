@@ -1,96 +1,58 @@
 ---
-layout: default
+layout: index-material-sidebar-left
+description: the good site of life
 ---
-<div class="page-content">
-  <div class="mdl-grid">
-  {% if site.post_type == 'highlight' %}
+{% for post in paginator.posts %}
+    {% include article_index.html %}
+{% endfor %}
 
-    {% for post in site.posts %}
-    {% if post.highlight %}
+{% if paginator.total_pages > 1 %}
+    <div class="pagination">
+        <!-- link to first page -->
+        {% if paginator.total_pages > 3 %}
+            {% if paginator.page == 1 %}
+                <span class="btn disabled"><i class="fa fa-angle-double-left"></i></span>
+            {% else %}
+                <a class="btn" href="{{ '/' | prepend: site.baseurl | replace: '//', '/' }}"><i class="fa fa-angle-double-left"></i></a>
+            {% endif %}
+        {% endif %}
 
-    <div class="section-highlight section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+        <!-- previous link -->
+        {% if paginator.previous_page %}
+            <a class="btn prev" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}"><i class="fa fa-angle-left"></i></a>
+        {% else %}
+            <span class="btn disabled"><i class="fa fa-angle-left"></i></span>
+        {% endif %}
 
-      <header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone" {% if post.image %} style="background: url('{{ post.image }}') center/cover;" {% endif %}></header>
+        <!-- number links -->
+        {% capture start %}
+            {{ paginator.page | minus: 3 }}
+        {% endcapture %}
 
-      <div class="mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
-        <div class="mdl-card__supporting-text">
-          <h4>{{ post.title }}</h4>
-          <p>{{ post.excerpt }}</p>
-        </div>
-        <div class="mdl-card__actions">
-          <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{ post.url | prepend: site.baseurl }}">Read More</a>
-        </div>
-      </div>
+        {% for i in (1..paginator.total_pages) limit: 5 offset: start %}
+            {% if i == paginator.page %}
+                <span class="btn disabled">{{ i }}</span>
+            {% elsif i == 1 %}
+                <a class="btn" href="{{ site.baseurl }}/">{{ i }}</a>
+            {% else %}
+                <a class="btn" href="/page/{{ i }}">{{ i }}</a>
+            {% endif %}
+        {% endfor %}
 
-      <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="btn-high">
-        <i class="material-icons">more_vert</i>
-      </button>
-      <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn-high">
-        <li><a href="https://www.facebook.com/dialog/share?app_id={app_id}&display=page&href={{ post.url | prepend: site.baseurl }}&redirect_uri={{ site.baseurl }}" class="mdl-menu__item">Facebook</a></li>
-        <li><a href="https://twitter.com/share?url={{ post.url | prepend: site.baseurl }}&text={{ post.title }}&via={{ site.twitter_username }}" class="mdl-menu__item">Twitter</a></li>
-        <li><a href="https://plus.google.com/share?url={{ post.url | prepend: site.baseurl }}" class="mdl-menu__item">Google+</a></li>
-      </ul>
+        <!-- next link -->
+        {% if paginator.next_page %}
+            <a class="btn next" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}"><i class="fa fa-angle-right"></i></a>
+        {% else %}
+            <span class="btn disabled"><i class="fa fa-angle-right"></i></span>
+        {% endif %}
 
+        <!-- last page link -->
+        {% if paginator.total_pages > 3 %}
+            {% if paginator.page == paginator.total_pages %}
+                <span class="btn disabled"><i class="fa fa-angle-double-right"></i></span>
+            {% else %}
+                <a class="btn" href="{{ site.baseurl | replace: '//', '/' }}/page/{{paginator.total_pages}}"><i class="fa fa-angle-double-right"></i></a>
+            {% endif %}
+        {% endif %}
     </div>
-
-    {% else %}
-
-    <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--12-col-phone">
-      <div class="mdl-card__title" {% if post.image %} style="background: url('{{ post.image }}') center/cover;" {% endif %}>
-        <h2 class="mdl-card__title-text">{{ post.title }}</h2>
-      </div>
-      <div class="mdl-card__supporting-text">
-        <span>{{ post.date | date: "%b %-d, %Y" }}</span>
-        <p>{{ post.excerpt }}</p>
-      </div>
-      <div class="mdl-card__actions mdl-card--border">
-        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{ post.url | prepend: site.baseurl }}">Read More</a>
-      </div>
-      <div class="mdl-card__menu">
-        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="post-{{ post.id }}">
-          <i class="material-icons">share</i>
-        </button>
-        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="post-{{ post.id }}">
-          <li><a href="https://www.facebook.com/dialog/share?app_id={app_id}&display=page&href={{ post.url | prepend: site.baseurl }}&redirect_uri={{ site.baseurl }}" class="mdl-menu__item">Facebook</a></li>
-          <li><a href="https://twitter.com/share?url={{ post.url | prepend: site.baseurl }}&text={{ post.title }}&via={{ site.twitter_username }}" class="mdl-menu__item">Twitter</a></li>
-          <li><a href="https://plus.google.com/share?url={{ post.url | prepend: site.baseurl }}" class="mdl-menu__item">Google+</a></li>
-        </ul>
-      </div>
-    </div>
-    {% endif %}
-    {% endfor %}
-
-  {% else %}
-
-    {% for post in site.posts %}
-
-    <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-desktop mdl-cell--4-col-tablet  mdl-cell--12-col-phone">
-      <div class="mdl-card__title" {% if post.image %} style="background: url('{{ post.image }}') center/cover;" {% endif %}>
-        <h2 class="mdl-card__title-text">{{ post.title }}</h2>
-      </div>
-      <div class="mdl-card__supporting-text">
-        <span>{{ post.date | date: "%b %-d, %Y" }}</span>
-        <p>{{ post.excerpt }}</p>
-      </div>
-      <div class="mdl-card__actions mdl-card--border">
-        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="{{ post.url | prepend: site.baseurl }}">
-          Read More
-        </a>
-      </div>
-      <div class="mdl-card__menu">
-        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" id="post-{{ post.id }}">
-          <i class="material-icons">share</i>
-        </button>
-        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="post-{{ post.id }}">
-          <li><a href="https://www.facebook.com/dialog/share?app_id={app_id}&display=page&href={{ post.url | prepend: site.baseurl }}&redirect_uri={{ site.baseurl }}" class="mdl-menu__item">Facebook</a></li>
-          <li><a href="https://twitter.com/share?url={{ post.url | prepend: site.baseurl }}&text={{ post.title }}&via={{ site.twitter_username }}" class="mdl-menu__item">Twitter</a></li>
-          <li><a href="https://plus.google.com/share?url={{ post.url | prepend: site.baseurl }}" class="mdl-menu__item">Google+</a></li>
-        </ul>
-      </div>
-    </div>
-
-    {% endfor %}
-
-  {% endif %}
-  </div>
-</div>
+{% endif %}
