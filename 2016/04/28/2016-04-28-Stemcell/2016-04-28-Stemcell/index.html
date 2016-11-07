@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Stemcell 기획 | NoizBuster</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="rust,stemcell,staticgen" />
+    
+    <meta name="description" content="동기jekyll을 비롯하여 StaticGen을 이용하여 블로그나 웹페이지를 빌드해주는 엔진들을 사용해 보았는데, 맘에 안드는것이 좀 있었다.  
+
+front matter 로 사용하는것들이 일관성이 없을뿐더러 .md 파일 자체만 preview 하는경우에 전혀 본문의 일부처럼 보이지 않는다.  
+Static Page 를 빌드하고 나서의 상대 이미지의 경로 문제">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Stemcell 기획">
+<meta property="og:url" content="http://noizbuster.com/2016/04/28/2016-04-28-Stemcell/2016-04-28-Stemcell/index.html">
+<meta property="og:site_name" content="NoizBuster">
+<meta property="og:description" content="동기jekyll을 비롯하여 StaticGen을 이용하여 블로그나 웹페이지를 빌드해주는 엔진들을 사용해 보았는데, 맘에 안드는것이 좀 있었다.  
+
+front matter 로 사용하는것들이 일관성이 없을뿐더러 .md 파일 자체만 preview 하는경우에 전혀 본문의 일부처럼 보이지 않는다.  
+Static Page 를 빌드하고 나서의 상대 이미지의 경로 문제">
+<meta property="og:updated_time" content="2016-10-27T05:17:23.282Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Stemcell 기획">
+<meta name="twitter:description" content="동기jekyll을 비롯하여 StaticGen을 이용하여 블로그나 웹페이지를 빌드해주는 엔진들을 사용해 보았는데, 맘에 안드는것이 좀 있었다.  
+
+front matter 로 사용하는것들이 일관성이 없을뿐더러 .md 파일 자체만 preview 하는경우에 전혀 본문의 일부처럼 보이지 않는다.  
+Static Page 를 빌드하고 나서의 상대 이미지의 경로 문제">
+<meta name="twitter:creator" content="@noizbuster">
+<meta property="fb:admins" content="noizbuster">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-84347291-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/design/">design</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/development/">development</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/review/">review</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/uncategorized/">uncategorized</a></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/development/">development</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-2016-04-28-Stemcell/2016-04-28-Stemcell" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        Stemcell 기획
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/2016/04/28/2016-04-28-Stemcell/2016-04-28-Stemcell/" class="article-date">
+    <time datetime="2016-04-27T15:00:00.000Z" itemprop="datePublished">2016-04-28</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rust/">rust</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/staticgen/">staticgen</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/stemcell/">stemcell</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h1 id="동기"><a href="#동기" class="headerlink" title="동기"></a>동기</h1><p>jekyll을 비롯하여 StaticGen을 이용하여 블로그나 웹페이지를 빌드해주는 엔진들을 사용해 보았는데, 맘에 안드는것이 좀 있었다.  </p>
+<ul>
+<li>front matter 로 사용하는것들이 일관성이 없을뿐더러 .md 파일 자체만 preview 하는경우에 전혀 본문의 일부처럼 보이지 않는다.  </li>
+<li>Static Page 를 빌드하고 나서의 상대 이미지의 경로 문제</li>
+</ul>
+<p>front matter 의 경우 그나마 중간에 개행을 추가한 yml 포멧은 md 를 html로 컴파일 했을때 보기에 좀 나아서 사용하고 있지만. 이것역시 다른 엔진이나 테마로 넘어가기엔 호환성이 떨어진다는 문제가 있다(모든 파일을 다시 수정해야한다는 이야기).  </p>
+<p>이미지 경로의 경우 나같은 경우 아톰의 img-paste 플러그인으로 md 파일안에 이미지를 링크하는데 이것은 .md 파일과 같은곳에 저장되며 상대경로로 .md 파일안에 링크가 된다. 그런데 staticGen 으로 빌드한 static page 의 경우 destination directory 에 저장된 html 파일과 원본 이미지 파일과의 위치가 다르기 때문에 링크가 죄다 깨지는 문제가 있다.<br>이를 해결하기 위해서는 Destination 디렉토리로 .md 파일내부의 상대경로를 수정하는 일종의 compile 과정을 거치게 하거나 image file 들을 destination directory 로 복사 해 주는 과정이 필요하다.</p>
+<p>난 테마나 빌드엔진을 바꿀때 컨텐츠파일의 대부분을 재작성하는것을 원하지 않고, 포스트가 디렉토리 단위로 관리가 되었으면 하는 마음이 있다.<br>그래서 정형화된 디렉토리와 파일이름으로 포스트를 작성했을때 이것을 jekyll과 같은 staticGen엔진이 빌드 할 수 있도록 다시 포매팅 해주는 전처리기를 만드려고 한다.<br>본 포스트에서는 러프하게 그 계획을 세워보겠다.</p>
+<h1 id="Design-Plan"><a href="#Design-Plan" class="headerlink" title="Design Plan"></a>Design Plan</h1><ol>
+<li>design directory structure</li>
+<li>design front-matter load mechanism</li>
+<li>change image path to destination</li>
+</ol>
+<h1 id="Design"><a href="#Design" class="headerlink" title="Design"></a>Design</h1><h2 id="Directory-structure-design"><a href="#Directory-structure-design" class="headerlink" title="Directory structure design"></a>Directory structure design</h2><p>categoryName = NNNN-name<br>articleName = yyyyMMddhhmmss-title hhmmss is optional</p>
+<ul>
+<li>blogRoot/categoryName/articleName/</li>
+</ul>
+<p>check existence of front-matter.yml</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://noizbuster.com/2016/04/28/2016-04-28-Stemcell/2016-04-28-Stemcell/" data-id="civ7my04u001vbisgw09ulkme" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="http://twitter.com/noizbuster" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="http://facebook.com/noizbuster" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="https://www.linkedin.com/in/wonwoo-yang-1433b69a" target="_blank">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="gitlab" href="https://gitlab.com/u/noizbuster" target="_blank">
+                        <i class="icon fa fa-gitlab"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/noizbuster" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/04/30/2016-04-30-noizbuster-logo-design/2016-04-30-noizbuster-logo-design/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            Noizbuster Logo Design
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2016/04/20/2016-04-20-ova-to-dockerimg/2016-04-20-ova-to-dockerimg/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">Converting .OVA to docker image</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/development/">development</a></p>
+                            <p class="item-title"><a href="/2016/11/03/2016-11-03-153952-holywar-about-table-name/2016-11-03-153952-holywar-about-table-name/" class="title">성전! SQL 테이블명</a></p>
+                            <p class="item-date"><time datetime="2016-11-03T06:39:52.000Z" itemprop="datePublished">2016-11-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/development/">development</a></p>
+                            <p class="item-title"><a href="/2016/11/01/2016-11-01-132517-mongodb-transaction/2016-11-01-132517-mongodb-transaction/" class="title">Transaction on MongoDB</a></p>
+                            <p class="item-date"><time datetime="2016-11-01T04:25:17.000Z" itemprop="datePublished">2016-11-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/development/">development</a></p>
+                            <p class="item-title"><a href="/2016/10/31/2016-10-31-112249-authentication-on-msa/2016-10-31-112249-authentication-on-msa/" class="title">authentication-on-msa</a></p>
+                            <p class="item-date"><time datetime="2016-10-31T02:22:49.000Z" itemprop="datePublished">2016-10-31</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/uncategorized/">uncategorized</a></p>
+                            <p class="item-title"><a href="/2016/10/28/2016-10-28-160609-untitled/2016-10-28-160609-untitled/" class="title">untitled</a></p>
+                            <p class="item-date"><time datetime="2016-10-28T07:06:09.000Z" itemprop="datePublished">2016-10-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/development/">development</a></p>
+                            <p class="item-title"><a href="/2016/09/08/2016-09-08-102937-restful-api-error-handling/2016-09-08-102937-restful-api-error-handling/" class="title">Handling RESTful API Errors</a></p>
+                            <p class="item-date"><time datetime="2016-09-08T01:29:37.000Z" itemprop="datePublished">2016-09-08</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/design/">design</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/development/">development</a><span class="category-list-count">45</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/review/">review</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/uncategorized/">uncategorized</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">4</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/actionhero/">actionhero</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular1-5/">angular1.5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular2/">angular2</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ansible/">ansible</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/api/">api</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apt/">apt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/audio/">audio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/authentication/">authentication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cd/">cd</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/celery/">celery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci/">ci</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/comet/">comet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/commonmark/">commonmark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/compose/">compose</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/container/">container</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/convention/">convention</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design/">design</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/diy/">diy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/documentation/">documentation</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/earphone/">earphone</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend/">frontend</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gigabyte/">gigabyte</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ide/">ide</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jekyll/">jekyll</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jenkins/">jenkins</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jenkins2/">jenkins2</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsdoc/">jsdoc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kobuki/">kobuki</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laptop/">laptop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logo/">logo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logpolling/">logpolling</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/loopback/">loopback</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mapping-table/">mapping table</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mariadb/">mariadb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markup/">markup</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micro-service-architecture/">micro service architecture</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/msa/">msa</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/naming-convention/">naming convention</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/noizbuster/">noizbuster</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openapi/">openapi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os/">os</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ova/">ova</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/p34w-v3/">p34w v3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/package-management/">package management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/phiaton/">phiaton</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/polling/">polling</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/promise/">promise</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-flask/">python flask</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberryPi/">raspberryPi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rest/">rest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/restful/">restful</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/robot/">robot</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ros/">ros</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rust/">rust</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/">security</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/service-discovery/">service discovery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/staticgen/">staticgen</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/staticweb/">staticweb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stemcell/">stemcell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swagger/">swagger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swagger-ui/">swagger-ui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swarm/">swarm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transaction/">transaction</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualbox/">virtualbox</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualenv/">virtualenv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/visualstudio/">visualstudio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vm/">vm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webstorm/">webstorm</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/actionhero/" style="font-size: 10px;">actionhero</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/angular1-5/" style="font-size: 10px;">angular1.5</a> <a href="/tags/angular2/" style="font-size: 11.67px;">angular2</a> <a href="/tags/ansible/" style="font-size: 10px;">ansible</a> <a href="/tags/api/" style="font-size: 10px;">api</a> <a href="/tags/apt/" style="font-size: 10px;">apt</a> <a href="/tags/audio/" style="font-size: 10px;">audio</a> <a href="/tags/authentication/" style="font-size: 10px;">authentication</a> <a href="/tags/blog/" style="font-size: 11.67px;">blog</a> <a href="/tags/cd/" style="font-size: 11.67px;">cd</a> <a href="/tags/celery/" style="font-size: 10px;">celery</a> <a href="/tags/ci/" style="font-size: 11.67px;">ci</a> <a href="/tags/comet/" style="font-size: 10px;">comet</a> <a href="/tags/commonmark/" style="font-size: 10px;">commonmark</a> <a href="/tags/compose/" style="font-size: 11.67px;">compose</a> <a href="/tags/container/" style="font-size: 13.33px;">container</a> <a href="/tags/convention/" style="font-size: 10px;">convention</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/diy/" style="font-size: 10px;">diy</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/documentation/" style="font-size: 11.67px;">documentation</a> <a href="/tags/earphone/" style="font-size: 10px;">earphone</a> <a href="/tags/frontend/" style="font-size: 10px;">frontend</a> <a href="/tags/gigabyte/" style="font-size: 10px;">gigabyte</a> <a href="/tags/ide/" style="font-size: 10px;">ide</a> <a href="/tags/javascript/" style="font-size: 11.67px;">javascript</a> <a href="/tags/jekyll/" style="font-size: 11.67px;">jekyll</a> <a href="/tags/jenkins/" style="font-size: 11.67px;">jenkins</a> <a href="/tags/jenkins2/" style="font-size: 11.67px;">jenkins2</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jsdoc/" style="font-size: 10px;">jsdoc</a> <a href="/tags/kobuki/" style="font-size: 10px;">kobuki</a> <a href="/tags/laptop/" style="font-size: 10px;">laptop</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/logo/" style="font-size: 10px;">logo</a> <a href="/tags/logpolling/" style="font-size: 10px;">logpolling</a> <a href="/tags/loopback/" style="font-size: 10px;">loopback</a> <a href="/tags/mapping-table/" style="font-size: 10px;">mapping table</a> <a href="/tags/mariadb/" style="font-size: 10px;">mariadb</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/markup/" style="font-size: 10px;">markup</a> <a href="/tags/micro-service-architecture/" style="font-size: 13.33px;">micro service architecture</a> <a href="/tags/mongodb/" style="font-size: 11.67px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/msa/" style="font-size: 16.67px;">msa</a> <a href="/tags/naming-convention/" style="font-size: 10px;">naming convention</a> <a href="/tags/node/" style="font-size: 11.67px;">node</a> <a href="/tags/nodejs/" style="font-size: 15px;">nodejs</a> <a href="/tags/noizbuster/" style="font-size: 10px;">noizbuster</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/openapi/" style="font-size: 10px;">openapi</a> <a href="/tags/os/" style="font-size: 10px;">os</a> <a href="/tags/ova/" style="font-size: 10px;">ova</a> <a href="/tags/p34w-v3/" style="font-size: 10px;">p34w v3</a> <a href="/tags/package-management/" style="font-size: 10px;">package management</a> <a href="/tags/phiaton/" style="font-size: 10px;">phiaton</a> <a href="/tags/polling/" style="font-size: 10px;">polling</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/python-flask/" style="font-size: 10px;">python flask</a> <a href="/tags/raspberryPi/" style="font-size: 10px;">raspberryPi</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/rest/" style="font-size: 10px;">rest</a> <a href="/tags/restful/" style="font-size: 10px;">restful</a> <a href="/tags/robot/" style="font-size: 20px;">robot</a> <a href="/tags/ros/" style="font-size: 20px;">ros</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/service-discovery/" style="font-size: 10px;">service discovery</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/staticgen/" style="font-size: 10px;">staticgen</a> <a href="/tags/staticweb/" style="font-size: 10px;">staticweb</a> <a href="/tags/stemcell/" style="font-size: 10px;">stemcell</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/swagger-ui/" style="font-size: 10px;">swagger-ui</a> <a href="/tags/swarm/" style="font-size: 10px;">swarm</a> <a href="/tags/transaction/" style="font-size: 10px;">transaction</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/virtualbox/" style="font-size: 11.67px;">virtualbox</a> <a href="/tags/virtualenv/" style="font-size: 10px;">virtualenv</a> <a href="/tags/visualstudio/" style="font-size: 10px;">visualstudio</a> <a href="/tags/vm/" style="font-size: 10px;">vm</a> <a href="/tags/web/" style="font-size: 18.33px;">web</a> <a href="/tags/webstorm/" style="font-size: 10px;">webstorm</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://www.noizbuster.com">Noizbuster.com</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2016 noizbuster</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'noizbuster';
+    
+    
+    var disqus_url = 'http://noizbuster.com/2016/04/28/2016-04-28-Stemcell/2016-04-28-Stemcell/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

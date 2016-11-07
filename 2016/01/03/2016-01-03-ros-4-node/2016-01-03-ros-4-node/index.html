@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>ROS Study 004. ros node | NoizBuster</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="robot,ros" />
+    
+    <meta name="description" content="####본 내용은 개념적인것임으로 기존에 설명된 자료들을 이야기 하고 넘어가도록 하겠다.한국어로 설명된 카페의 내용이다.http://cafe.naver.com/openrt/2468
+####이하 내용은 wiki.ROS.org 에 게시된 튜토리얼을 대충 번역한것이다.http://wiki.ros.org/ROS/Tutorials/UnderstandingNodes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ROS Study 004. ros node">
+<meta property="og:url" content="http://noizbuster.com/2016/01/03/2016-01-03-ros-4-node/2016-01-03-ros-4-node/index.html">
+<meta property="og:site_name" content="NoizBuster">
+<meta property="og:description" content="####본 내용은 개념적인것임으로 기존에 설명된 자료들을 이야기 하고 넘어가도록 하겠다.한국어로 설명된 카페의 내용이다.http://cafe.naver.com/openrt/2468
+####이하 내용은 wiki.ROS.org 에 게시된 튜토리얼을 대충 번역한것이다.http://wiki.ros.org/ROS/Tutorials/UnderstandingNodes">
+<meta property="og:updated_time" content="2016-10-27T05:17:14.234Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ROS Study 004. ros node">
+<meta name="twitter:description" content="####본 내용은 개념적인것임으로 기존에 설명된 자료들을 이야기 하고 넘어가도록 하겠다.한국어로 설명된 카페의 내용이다.http://cafe.naver.com/openrt/2468
+####이하 내용은 wiki.ROS.org 에 게시된 튜토리얼을 대충 번역한것이다.http://wiki.ros.org/ROS/Tutorials/UnderstandingNodes">
+<meta name="twitter:creator" content="@noizbuster">
+<meta property="fb:admins" content="noizbuster">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-84347291-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/design/">design</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/development/">development</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/review/">review</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/uncategorized/">uncategorized</a></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/development/">development</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-2016-01-03-ros-4-node/2016-01-03-ros-4-node" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        ROS Study 004. ros node
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/2016/01/03/2016-01-03-ros-4-node/2016-01-03-ros-4-node/" class="article-date">
+    <time datetime="2016-01-02T15:00:00.000Z" itemprop="datePublished">2016-01-03</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/robot/">robot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ros/">ros</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>####본 내용은 개념적인것임으로 기존에 설명된 자료들을 이야기 하고 넘어가도록 하겠다.<br>한국어로 설명된 카페의 내용이다.<br><a href="http://cafe.naver.com/openrt/2468" target="_blank" rel="external">http://cafe.naver.com/openrt/2468</a></p>
+<p>####이하 내용은 wiki.ROS.org 에 게시된 튜토리얼을 대충 번역한것이다.<br><a href="http://wiki.ros.org/ROS/Tutorials/UnderstandingNodes" target="_blank" rel="external">http://wiki.ros.org/ROS/Tutorials/UnderstandingNodes</a></p>
+<hr>
+<p>###사전작업</p>
+<p>이 튜토리얼을 위해서 우리는 가벼운 시뮬레이터를 사용할것이다.<br><code>$ sudo apt-get install ros-&lt;distro&gt;-ros-tutorials</code><br><code>&lt;distro&gt;</code>부분을 당신이 사용하는 배포판으로 대체해서 사용하면 된다.(e.g. hydro, groovy, electric, fuerte etc.)</p>
+<p>###그래프컨셉을 빠르게 리뷰하기</p>
+<ul>
+<li>Nodes: 노드는 ROS를 이용해서 실행가능한것이고 ㅇ다른 노트들과 대화(통신)할 수 있는것이다.</li>
+<li>Messages: 토픽(Topic)을 구독(subscribing) 하거나 발행(publishing)할때 사용되는 ROS 데이터 타입</li>
+<li>Topics: 노드는 토픽에 대한 메세지를 발행 할 수 있을 뿐만 아니라 구독 해서 메세지를 받을 수도 있다.</li>
+<li>Master: 로스 서비스의 이름, 같은 서비스에 있는 노드들이 서로를 찾을 수 있도록 중계해주는 역할.</li>
+<li>rosout: 로스에서 사용되는 stdout/stderr와 같은 인터페이스</li>
+<li>roscore: Master + rosout + parameter server (파라미터 서버에 대해서는 나중에 설명한다.)</li>
+</ul>
+<p>###Nodes 노드</p>
+<p>노드는 로스 패키지내에서 실행 가능한것 이상이 아니다. 로스 노드는 로스 클라이언트 라이브러리를 사용해서 다른 노드들과 통신한다. 노드들은 토픽을 발행하거나 구독 할 수 있다. 노드들은 서비스를 제공하거나 사용할 수 있다.</p>
+<p>###Client Libraries</p>
+<p>로스 클라이언트 라이브러리는 서로 다른 언어로 작성된 노드끼리 통신 할 수 있도록 해준다.</p>
+<p>rospy = python client library</p>
+<p>roscpp = c++ client library</p>
+<p>###roscore</p>
+<p>roscore 는 로스르 이용해서 실행해야할 첫번째것이다.</p>
+<p>Please run:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ roscore</div></pre></td></tr></table></figure></p>
+<p>이런 메세지를 볼 수 있을것이다.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">... logging to ~/.ros/<span class="built_in">log</span>/9cf88ce4-b14d-11df-8a75-00251148e8cf/roslaunch-machine_name-13039.log</div><div class="line">Checking <span class="built_in">log</span> directory <span class="keyword">for</span> disk usage. This may take awhile.</div><div class="line">Press Ctrl-C to interrupt</div><div class="line">Done checking <span class="built_in">log</span> file disk usage. Usage is &lt;1GB.</div><div class="line">started roslaunch server http://machine_name:33919/</div><div class="line">ros_comm version 1.4.7</div><div class="line">SUMMARY</div><div class="line">========</div><div class="line">PARAMETERS</div><div class="line"> * /rosversion</div><div class="line"> * /rosdistro</div><div class="line">NODES</div><div class="line">auto-starting new master</div><div class="line">process[master]: started with pid [13054]</div><div class="line">ROS_MASTER_URI=http://machine_name:11311/</div><div class="line">setting /run_id to 9cf88ce4-b14d-11df-8a75-00251148e8cf</div><div class="line">process[rosout-1]: started with pid [13067]</div><div class="line">started core service [/rosout]</div></pre></td></tr></table></figure></p>
+<p>만약 로스코어가 초기화 되어있지 않았으면 아마 당신은 네트워크 설정 문제가 있을것이다.<a href="http://wiki.ros.org/ROS/NetworkSetup#Single_machine_configuration" target="_blank" rel="external">Network Setup - Single Machine Configuration</a><br>만약 로스코어가 초기화 되지 않고 퍼미션이 부족하다는 메세지를 보았으면 아마도 ~/.ros 경로를 루트가 소유하고 있을것이다. 다음 명령어도 해결 할수 있다.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo chown -R &lt;your_username&gt; ~/.ros</div></pre></td></tr></table></figure></p>
+<p>###Using rosnode</p>
+<p>roscore를 켜둔채로 새로운 터미널을 열어서 로스 노드를 사용해 보자</p>
+<p><code>rosnode</code> 는 ROS에서 현재 동작중인 노드들에 대한 정보를 보여준다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ rosnode list</div><div class="line">/rosout</div></pre></td></tr></table></figure>
+<p>이것은 우리에게 <code>rosout</code> 한개의 노드만이 실행중이라고 보여준다. 이것은 항상 실행되며 노드에 대한 디버깅 출력되 로그를 모은다.</p>
+<p><code>rosnode</code> 명령어는 특정 노드에 대한 정보만 리턴 할 수도 있다.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">$ rosnode info /rosout</div><div class="line">Node [/rosout]</div><div class="line">Publications:</div><div class="line"> * /rosout_agg [rosgraph_msgs/Log]</div><div class="line"></div><div class="line">Subscriptions:</div><div class="line"> * /rosout [unknown <span class="built_in">type</span>]</div><div class="line"></div><div class="line">Services:</div><div class="line"> * /rosout/set_logger_level</div><div class="line"> * /rosout/get_loggers</div><div class="line"></div><div class="line">contacting node http://machine_name:54614/ ...</div><div class="line">Pid: 5092</div></pre></td></tr></table></figure></p>
+<p>이제 더 많은 노드들을 봐보자, 이것을 위해 우리는 rosrun을 이용해서 다른 노드들을 가져와 볼 것 이다.</p>
+<p>###Using rosrun</p>
+<p><code>rosrun</code> 은 패키지 이름을 이용해서 직접적으로 패키지에 있는 노드를 구동 할 수 있게 해준다.(알고 있는 패키지 경로에 대해서만).</p>
+<p>Usage:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#rosrun [package_name] [node_name]</span></div><div class="line">$ rosrun turtlesim turtlesim_node</div></pre></td></tr></table></figure></p>
+<p>당신은 turtlesim 창을 볼 수 있을것이다.</p>
+<p>In a new terminal:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ rosnode list</div><div class="line">/rosout</div><div class="line">/turtlesim</div></pre></td></tr></table></figure></p>
+<p>강력한 로스의 기능중 하나는 커맨드라인에서 노드의 이름을 다시 할당 할수 있는것이다.</p>
+<p>turtlesim window를 닫아 노드를 중단시키고 (혹은 터미널에서 컨트롤+C를 누르고 재실행하는데 다음과 같이 아규먼트를 줄것이다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ rosrun turtlesim turtlesim_node __name:=my_turtle</div></pre></td></tr></table></figure>
+<p>이제 다시 노드들의 리스트를 보면</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ rosnode list</div><div class="line">/rosout</div><div class="line">/my_turtle</div></pre></td></tr></table></figure>
+<p>제대로 안닫긴 노드가 리스트에 보일때는 <code>$ rosnode cleanup</code> 을 이용해서 클린업 할 수 있다.</p>
+<p>rosnode 를 이용해서 노드에다가 핑을 날려볼수도 있다.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ rosnode ping my_turtle</div><div class="line">rosnode: node is [/my_turtle]</div><div class="line">pinging /my_turtle with a timeout of 3.0s</div><div class="line">xmlrpc reply from http://aqy:42235/     time=1.152992ms</div><div class="line">xmlrpc reply from http://aqy:42235/     time=1.120090ms</div><div class="line">xmlrpc reply from http://aqy:42235/     time=1.700878ms</div><div class="line">xmlrpc reply from http://aqy:42235/     time=1.127958ms</div></pre></td></tr></table></figure></p>
+<p>###Review<br>What was covered:</p>
+<ul>
+<li>roscore = ros+core : master (provides name service for ROS) + rosout (stdout/stderr) + parameter server (parameter server will be introduced later)</li>
+<li>rosnode = ros+node : ROS tool to get information about a node.</li>
+<li>rosrun = ros+run : runs a node from a given package.</li>
+</ul>
+<p>Now that you understand how ROS nodes work, let’s look at how ROS topics work. Also, feel free to press Ctrl-C to stop turtlesim_node.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://noizbuster.com/2016/01/03/2016-01-03-ros-4-node/2016-01-03-ros-4-node/" data-id="civ7my0440006bisgmjjjdief" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="http://twitter.com/noizbuster" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="http://facebook.com/noizbuster" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="https://www.linkedin.com/in/wonwoo-yang-1433b69a" target="_blank">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="gitlab" href="https://gitlab.com/u/noizbuster" target="_blank">
+                        <i class="icon fa fa-gitlab"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/noizbuster" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/01/03/2016-01-03-ros-5-topic/2016-01-03-ros-5-topic/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">newer</strong>
+        <p class="article-nav-title">
+        
+            ROS Study 005. Topics
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2015/12/30/2015-12-30-ros-3-create-package/2015-12-30-ros-3-create-package/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">ROS Study 003. Create the Package</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/development/">development</a></p>
+                            <p class="item-title"><a href="/2016/11/03/2016-11-03-153952-holywar-about-table-name/2016-11-03-153952-holywar-about-table-name/" class="title">성전! SQL 테이블명</a></p>
+                            <p class="item-date"><time datetime="2016-11-03T06:39:52.000Z" itemprop="datePublished">2016-11-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/development/">development</a></p>
+                            <p class="item-title"><a href="/2016/11/01/2016-11-01-132517-mongodb-transaction/2016-11-01-132517-mongodb-transaction/" class="title">Transaction on MongoDB</a></p>
+                            <p class="item-date"><time datetime="2016-11-01T04:25:17.000Z" itemprop="datePublished">2016-11-01</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/development/">development</a></p>
+                            <p class="item-title"><a href="/2016/10/31/2016-10-31-112249-authentication-on-msa/2016-10-31-112249-authentication-on-msa/" class="title">authentication-on-msa</a></p>
+                            <p class="item-date"><time datetime="2016-10-31T02:22:49.000Z" itemprop="datePublished">2016-10-31</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/uncategorized/">uncategorized</a></p>
+                            <p class="item-title"><a href="/2016/10/28/2016-10-28-160609-untitled/2016-10-28-160609-untitled/" class="title">untitled</a></p>
+                            <p class="item-date"><time datetime="2016-10-28T07:06:09.000Z" itemprop="datePublished">2016-10-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/development/">development</a></p>
+                            <p class="item-title"><a href="/2016/09/08/2016-09-08-102937-restful-api-error-handling/2016-09-08-102937-restful-api-error-handling/" class="title">Handling RESTful API Errors</a></p>
+                            <p class="item-date"><time datetime="2016-09-08T01:29:37.000Z" itemprop="datePublished">2016-09-08</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/design/">design</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/development/">development</a><span class="category-list-count">45</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/review/">review</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/uncategorized/">uncategorized</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">4</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/actionhero/">actionhero</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular1-5/">angular1.5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular2/">angular2</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ansible/">ansible</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/api/">api</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apt/">apt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/audio/">audio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/authentication/">authentication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cd/">cd</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/celery/">celery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci/">ci</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/comet/">comet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/commonmark/">commonmark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/compose/">compose</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/container/">container</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/convention/">convention</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design/">design</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/diy/">diy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/documentation/">documentation</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/earphone/">earphone</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend/">frontend</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gigabyte/">gigabyte</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ide/">ide</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jekyll/">jekyll</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jenkins/">jenkins</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jenkins2/">jenkins2</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsdoc/">jsdoc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kobuki/">kobuki</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laptop/">laptop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logo/">logo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logpolling/">logpolling</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/loopback/">loopback</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mapping-table/">mapping table</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mariadb/">mariadb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markup/">markup</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micro-service-architecture/">micro service architecture</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/msa/">msa</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/naming-convention/">naming convention</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/noizbuster/">noizbuster</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openapi/">openapi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os/">os</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ova/">ova</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/p34w-v3/">p34w v3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/package-management/">package management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/phiaton/">phiaton</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/polling/">polling</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/promise/">promise</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-flask/">python flask</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberryPi/">raspberryPi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rest/">rest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/restful/">restful</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/robot/">robot</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ros/">ros</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rust/">rust</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/">security</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/service-discovery/">service discovery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/staticgen/">staticgen</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/staticweb/">staticweb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stemcell/">stemcell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swagger/">swagger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swagger-ui/">swagger-ui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swarm/">swarm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transaction/">transaction</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualbox/">virtualbox</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualenv/">virtualenv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/visualstudio/">visualstudio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vm/">vm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webstorm/">webstorm</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/actionhero/" style="font-size: 10px;">actionhero</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/angular1-5/" style="font-size: 10px;">angular1.5</a> <a href="/tags/angular2/" style="font-size: 11.67px;">angular2</a> <a href="/tags/ansible/" style="font-size: 10px;">ansible</a> <a href="/tags/api/" style="font-size: 10px;">api</a> <a href="/tags/apt/" style="font-size: 10px;">apt</a> <a href="/tags/audio/" style="font-size: 10px;">audio</a> <a href="/tags/authentication/" style="font-size: 10px;">authentication</a> <a href="/tags/blog/" style="font-size: 11.67px;">blog</a> <a href="/tags/cd/" style="font-size: 11.67px;">cd</a> <a href="/tags/celery/" style="font-size: 10px;">celery</a> <a href="/tags/ci/" style="font-size: 11.67px;">ci</a> <a href="/tags/comet/" style="font-size: 10px;">comet</a> <a href="/tags/commonmark/" style="font-size: 10px;">commonmark</a> <a href="/tags/compose/" style="font-size: 11.67px;">compose</a> <a href="/tags/container/" style="font-size: 13.33px;">container</a> <a href="/tags/convention/" style="font-size: 10px;">convention</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/diy/" style="font-size: 10px;">diy</a> <a href="/tags/docker/" style="font-size: 16.67px;">docker</a> <a href="/tags/documentation/" style="font-size: 11.67px;">documentation</a> <a href="/tags/earphone/" style="font-size: 10px;">earphone</a> <a href="/tags/frontend/" style="font-size: 10px;">frontend</a> <a href="/tags/gigabyte/" style="font-size: 10px;">gigabyte</a> <a href="/tags/ide/" style="font-size: 10px;">ide</a> <a href="/tags/javascript/" style="font-size: 11.67px;">javascript</a> <a href="/tags/jekyll/" style="font-size: 11.67px;">jekyll</a> <a href="/tags/jenkins/" style="font-size: 11.67px;">jenkins</a> <a href="/tags/jenkins2/" style="font-size: 11.67px;">jenkins2</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jsdoc/" style="font-size: 10px;">jsdoc</a> <a href="/tags/kobuki/" style="font-size: 10px;">kobuki</a> <a href="/tags/laptop/" style="font-size: 10px;">laptop</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/logo/" style="font-size: 10px;">logo</a> <a href="/tags/logpolling/" style="font-size: 10px;">logpolling</a> <a href="/tags/loopback/" style="font-size: 10px;">loopback</a> <a href="/tags/mapping-table/" style="font-size: 10px;">mapping table</a> <a href="/tags/mariadb/" style="font-size: 10px;">mariadb</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/markup/" style="font-size: 10px;">markup</a> <a href="/tags/micro-service-architecture/" style="font-size: 13.33px;">micro service architecture</a> <a href="/tags/mongodb/" style="font-size: 11.67px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/msa/" style="font-size: 16.67px;">msa</a> <a href="/tags/naming-convention/" style="font-size: 10px;">naming convention</a> <a href="/tags/node/" style="font-size: 11.67px;">node</a> <a href="/tags/nodejs/" style="font-size: 15px;">nodejs</a> <a href="/tags/noizbuster/" style="font-size: 10px;">noizbuster</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/openapi/" style="font-size: 10px;">openapi</a> <a href="/tags/os/" style="font-size: 10px;">os</a> <a href="/tags/ova/" style="font-size: 10px;">ova</a> <a href="/tags/p34w-v3/" style="font-size: 10px;">p34w v3</a> <a href="/tags/package-management/" style="font-size: 10px;">package management</a> <a href="/tags/phiaton/" style="font-size: 10px;">phiaton</a> <a href="/tags/polling/" style="font-size: 10px;">polling</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/python/" style="font-size: 13.33px;">python</a> <a href="/tags/python-flask/" style="font-size: 10px;">python flask</a> <a href="/tags/raspberryPi/" style="font-size: 10px;">raspberryPi</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/rest/" style="font-size: 10px;">rest</a> <a href="/tags/restful/" style="font-size: 10px;">restful</a> <a href="/tags/robot/" style="font-size: 20px;">robot</a> <a href="/tags/ros/" style="font-size: 20px;">ros</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/service-discovery/" style="font-size: 10px;">service discovery</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/staticgen/" style="font-size: 10px;">staticgen</a> <a href="/tags/staticweb/" style="font-size: 10px;">staticweb</a> <a href="/tags/stemcell/" style="font-size: 10px;">stemcell</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/swagger-ui/" style="font-size: 10px;">swagger-ui</a> <a href="/tags/swarm/" style="font-size: 10px;">swarm</a> <a href="/tags/transaction/" style="font-size: 10px;">transaction</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/virtualbox/" style="font-size: 11.67px;">virtualbox</a> <a href="/tags/virtualenv/" style="font-size: 10px;">virtualenv</a> <a href="/tags/visualstudio/" style="font-size: 10px;">visualstudio</a> <a href="/tags/vm/" style="font-size: 10px;">vm</a> <a href="/tags/web/" style="font-size: 18.33px;">web</a> <a href="/tags/webstorm/" style="font-size: 10px;">webstorm</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://www.noizbuster.com">Noizbuster.com</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2016 noizbuster</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'noizbuster';
+    
+    
+    var disqus_url = 'http://noizbuster.com/2016/01/03/2016-01-03-ros-4-node/2016-01-03-ros-4-node/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
