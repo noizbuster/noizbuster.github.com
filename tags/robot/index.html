@@ -186,13 +186,13 @@ ga('send', 'pageview');
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2016/01/04/2016-01-04-ros-17-record_and_playback_data/2016-01-04-ros-17-record_and_playback_data/">ROS Study 017. Recording and playing back data</a>
+        <a href="/2016/01/04/2016-01-04-ros-7-using_rqtconsole_and_roslaunch/2016-01-04-ros-7-using_rqtconsole_and_roslaunch/">ROS Study 007. Using rqt_console and roslaunch</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Description: This tutorial will teach you how to record data from a running ROS system into a .bag file, and then to play back the data to produce similar behavior in a running system.
-Keywords: data,
+            Prerequisites rqt and turtlesim package1sudo apt-get install ros-&lt;distro&gt;-rqt ros-&lt;distro&gt;-rqt-common-plugins ros-&lt;distro&gt;-turtlesim
+rqt_console &amp; rqt_logger_levelrqt_console 은 R
         </p>
     </div>
 </article>
@@ -218,12 +218,13 @@ Keywords: data,
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2016/01/04/2016-01-04-ros-9-creating_msg_and_srv/2016-01-04-ros-9-creating_msg_and_srv/">ROS Study 009. Creating a ROS msg and srv</a>
+        <a href="/2016/01/04/2016-01-04-ros-17-record_and_playback_data/2016-01-04-ros-17-record_and_playback_data/">ROS Study 017. Recording and playing back data</a>
         </h1>
     
 
         <p class="article-excerpt">
-            rosedrosed 는 rosbash의 일부분이다.이 명령어는 패키지명과 파일명으로 바로 파일을 편집 할 수 있도록 해준다.rosed roscpp Logger.msg 로 사용하면 roscpp 패키지 내부의 Logger.msg 파일을 바로 에디터로 열어준다.역시 탭 컴플리션을 지원하기 때문에 rosed roscpp 상태에서 탭을 두번치면 내부의 파일을 보여준
+            Description: This tutorial will teach you how to record data from a running ROS system into a .bag file, and then to play back the data to produce similar behavior in a running system.
+Keywords: data,
         </p>
     </div>
 </article>
@@ -245,13 +246,12 @@ Keywords: data,
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2016/01/04/2016-01-04-ros-7-using_rqtconsole_and_roslaunch/2016-01-04-ros-7-using_rqtconsole_and_roslaunch/">ROS Study 007. Using rqt_console and roslaunch</a>
+        <a href="/2016/01/04/2016-01-04-ros-9-creating_msg_and_srv/2016-01-04-ros-9-creating_msg_and_srv/">ROS Study 009. Creating a ROS msg and srv</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Prerequisites rqt and turtlesim package1sudo apt-get install ros-&lt;distro&gt;-rqt ros-&lt;distro&gt;-rqt-common-plugins ros-&lt;distro&gt;-turtlesim
-rqt_console &amp; rqt_logger_levelrqt_console 은 R
+            rosedrosed 는 rosbash의 일부분이다.이 명령어는 패키지명과 파일명으로 바로 파일을 편집 할 수 있도록 해준다.rosed roscpp Logger.msg 로 사용하면 roscpp 패키지 내부의 Logger.msg 파일을 바로 에디터로 열어준다.역시 탭 컴플리션을 지원하기 때문에 rosed roscpp 상태에서 탭을 두번치면 내부의 파일을 보여준
         </p>
     </div>
 </article>
@@ -340,14 +340,18 @@ rosservice call /clear 를 실행시
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2016/01/03/2016-01-03-ros-4-node/2016-01-03-ros-4-node/">ROS Study 004. ros node</a>
+        <a href="/2016/01/03/2016-01-03-ros-5-topic/2016-01-03-ros-5-topic/">ROS Study 005. Topics</a>
         </h1>
     
 
         <p class="article-excerpt">
-            ####본 내용은 개념적인것임으로 기존에 설명된 자료들을 이야기 하고 넘어가도록 하겠다.한국어로 설명된 카페의 내용이다.http://cafe.naver.com/openrt/2468
-####이하 내용은 wiki.ROS.org 에 게시된 튜토리얼을 대충 번역한것이다.http://wiki.ros.org/ROS/Tutorials/UnderstandingNodes
+            ###토픽
 
+rostopic echo [토픽이름] 토픽에서 주고 받는 내용 출력
+rostopic list 현재 활성화된 토픽들의 리스트를 본다.
+rostopic pub [토픽] [메세지타입] [데이터]    해당토픽에 메세지를 발행한다.
+rosrun rqt_graph rqt_graph 현재 노드들과 토픽들에 대해서 그래프를 그려준다.
+rostopic typ
         </p>
     </div>
 </article>
@@ -369,18 +373,14 @@ rosservice call /clear 를 실행시
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2016/01/03/2016-01-03-ros-5-topic/2016-01-03-ros-5-topic/">ROS Study 005. Topics</a>
+        <a href="/2016/01/03/2016-01-03-ros-4-node/2016-01-03-ros-4-node/">ROS Study 004. ros node</a>
         </h1>
     
 
         <p class="article-excerpt">
-            ###토픽
+            ####본 내용은 개념적인것임으로 기존에 설명된 자료들을 이야기 하고 넘어가도록 하겠다.한국어로 설명된 카페의 내용이다.http://cafe.naver.com/openrt/2468
+####이하 내용은 wiki.ROS.org 에 게시된 튜토리얼을 대충 번역한것이다.http://wiki.ros.org/ROS/Tutorials/UnderstandingNodes
 
-rostopic echo [토픽이름] 토픽에서 주고 받는 내용 출력
-rostopic list 현재 활성화된 토픽들의 리스트를 본다.
-rostopic pub [토픽] [메세지타입] [데이터]    해당토픽에 메세지를 발행한다.
-rosrun rqt_graph rqt_graph 현재 노드들과 토픽들에 대해서 그래프를 그려준다.
-rostopic typ
         </p>
     </div>
 </article>
@@ -665,7 +665,7 @@ Package는 로스코드의 소프트웨어 구성 단위이고 각각의 패키�
                 <h1 class="logo-wrap">
                     <a href="/" class="logo"></a>
                 </h1>
-                <p>&copy; 2016 noizbuster</p>
+                <p>&copy; 2017 noizbuster</p>
                 <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
             </div>
         </div>
