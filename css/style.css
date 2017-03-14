@@ -267,13 +267,13 @@ code {
   display: block;
   padding: 10px 0;
   width: 180px;
-  height: 90px;
+  height: 180px;
   background-image: url("images/logo-noizbuster-header.png");
   background-position: 0px 10px;
   background-repeat: no-repeat;
-  -webkit-background-size: 180px 90px;
-  -moz-background-size: 180px 90px;
-  background-size: 180px 90px;
+  -webkit-background-size: 180px 180px;
+  -moz-background-size: 180px 180px;
+  background-size: 180px 180px;
 }
 .main-body {
   margin-top: -60px;
@@ -349,7 +349,7 @@ code {
 }
 #header-title {
   text-align: center;
-  padding: 30px 30px;
+  padding: 10px 10px;
 }
 #header-title:before,
 #header-title:after {
@@ -370,7 +370,7 @@ code {
 #header-title .subtitle {
   font-size: 16px;
   font-style: italic;
-  line-height: 100px;
+  line-height: 190px;
   color: rgba(255,255,255,0.7);
   text-shadow: 0 1px rgba(0,0,0,0.2);
 }
@@ -1618,10 +1618,10 @@ a.article-title:hover {
 }
 #footer .logo {
   width: 144px;
-  height: 72px;
-  -webkit-background-size: 144px 72px;
-  -moz-background-size: 144px 72px;
-  background-size: 144px 72px;
+  height: 144px;
+  -webkit-background-size: 144px 144px;
+  -moz-background-size: 144px 144px;
+  background-size: 144px 144px;
 }
 i.icon {
   display: inline-block;
