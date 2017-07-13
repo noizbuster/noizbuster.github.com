@@ -159,12 +159,13 @@ ga('send', 'pageview');
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2016/01/04/2016-01-04-ros-9-creating_msg_and_srv/2016-01-04-ros-9-creating_msg_and_srv/">ROS Study 009. Creating a ROS msg and srv</a>
+        <a href="/2016/01/04/2016-01-04-ros-8-using_rosed/2016-01-04-ros-8-using_rosed/">ROS Study 008. Using rosed to edit files in ROS</a>
         </h1>
     
 
         <p class="article-excerpt">
-            rosedrosed 는 rosbash의 일부분이다.이 명령어는 패키지명과 파일명으로 바로 파일을 편집 할 수 있도록 해준다.rosed roscpp Logger.msg 로 사용하면 roscpp 패키지 내부의 Logger.msg 파일을 바로 에디터로 열어준다.역시 탭 컴플리션을 지원하기 때문에 rosed roscpp 상태에서 탭을 두번치면 내부의 파일을 보여준
+            msg 와 srv 에 대한 설명msg: msg 파일은 로스 메세지의 필드에 대해 설명된 간단한 파일이다. 그것들은 서로 다른 언어로 메세지를 생성하기위해서 사용된다.srv: srv 파일은 서비스에 대해서 설명된 파일이다. 이것은 두개의 부분으로 구성된다:리퀘스트, 리스폰스
+msg 파일은 패키지에서 msg 디렉토리에 저장된다.그리고 srv 파일은 srv디렉토
         </p>
     </div>
 </article>
@@ -173,6 +174,38 @@ ga('send', 'pageview');
     
     
     
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <div class="article-meta">
+            <p class="category">
+            <a class="article-category-link" href="/categories/development/">development</a>
+            </p>
+            <p class="date"><time datetime="2016-01-03T15:00:00.000Z" itemprop="datePublished">2016-01-04</time></p>
+        </div>
+        
+    
+        <h1 class="article-title" itemprop="name">
+        <a href="/2016/01/04/2016-01-04-ros-17-record_and_playback_data/2016-01-04-ros-17-record_and_playback_data/">ROS Study 017. Recording and playing back data</a>
+        </h1>
+    
+
+        <p class="article-excerpt">
+            Description: This tutorial will teach you how to record data from a running ROS system into a .bag file, and then to play back the data to produce similar behavior in a running system.
+Keywords: data,
+        </p>
+    </div>
+</article>
+    
+        </div>
+    
+
+    
+    
+    
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -200,14 +233,10 @@ rosservice call /clear 를 실행시
     </div>
 </article>
     
-        </div>
-    
 
     
     
     
-    
-        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -237,10 +266,14 @@ rostopic typ
     </div>
 </article>
     
+        </div>
+    
 
     
     
     
+    
+        <div class="article-row">
     
         <article class="article article-summary">
     <div class="article-summary-inner">
@@ -265,8 +298,6 @@ rostopic typ
         </p>
     </div>
 </article>
-    
-        </div>
     
 
     
@@ -507,8 +538,17 @@ Release 디렉토리 (솔루션, 프로젝트 경로상 모두)
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/development/">development</a></p>
-                            <p class="item-title"><a href="/2017/03/14/2016-08-18-093029-docker-swarm-study/2016-08-18-093029-docker-swarm-study/" class="title">Docker Swarm Study</a></p>
-                            <p class="item-date"><time datetime="2017-03-14T09:26:07.556Z" itemprop="datePublished">2017-03-14</time></p>
+                            <p class="item-title"><a href="/2017/07/13/2016-08-18-093029-docker-swarm-study/2016-08-18-093029-docker-swarm-study/" class="title">Docker Swarm Study</a></p>
+                            <p class="item-date"><time datetime="2017-07-13T00:36:03.427Z" itemprop="datePublished">2017-07-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/development/">development</a></p>
+                            <p class="item-title"><a href="/2017/06/05/2017-06-05-141344-authentication-on-angulario/2017-06-05-141344-authentication-on-angulario/" class="title">authentication-on-angulario</a></p>
+                            <p class="item-date"><time datetime="2017-06-05T05:13:44.000Z" itemprop="datePublished">2017-06-05</time></p>
                         </div>
                     </li>
                 
@@ -539,15 +579,6 @@ Release 디렉토리 (솔루션, 프로젝트 경로상 모두)
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/development/">development</a></p>
-                            <p class="item-title"><a href="/2017/01/09/2017-01-09-140001-angular-cli-with-flexlayout/2017-01-09-140001-angular-cli-with-flexlayout/" class="title">angular-cli-with-flexlayout</a></p>
-                            <p class="item-date"><time datetime="2017-01-09T05:00:01.000Z" itemprop="datePublished">2017-01-09</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -557,7 +588,7 @@ Release 디렉토리 (솔루션, 프로젝트 경로상 모두)
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/design/">design</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/development/">development</a><span class="category-list-count">53</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/review/">review</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/uncategorized/">uncategorized</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/design/">design</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/development/">development</a><span class="category-list-count">54</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/review/">review</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/uncategorized/">uncategorized</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -567,7 +598,7 @@ Release 디렉토리 (솔루션, 프로젝트 경로상 모두)
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">4</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">4</span></li></ul>
         </div>
     </div>
 
