@@ -277,13 +277,13 @@ msg 파일은 패키지에서 msg 디렉토리에 저장된다.그리고 srv 파
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2016/01/04/2016-01-04-ros-7-using_rqtconsole_and_roslaunch/2016-01-04-ros-7-using_rqtconsole_and_roslaunch/">ROS Study 007. Using rqt_console and roslaunch</a>
+        <a href="/2016/01/04/2016-01-04-ros-17-record_and_playback_data/2016-01-04-ros-17-record_and_playback_data/">ROS Study 017. Recording and playing back data</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Prerequisites rqt and turtlesim package1sudo apt-get install ros-&lt;distro&gt;-rqt ros-&lt;distro&gt;-rqt-common-plugins ros-&lt;distro&gt;-turtlesim
-rqt_console &amp; rqt_logger_levelrqt_console 은 R
+            Description: This tutorial will teach you how to record data from a running ROS system into a .bag file, and then to play back the data to produce similar behavior in a running system.
+Keywords: data,
         </p>
     </div>
 </article>
@@ -305,13 +305,13 @@ rqt_console &amp; rqt_logger_levelrqt_console 은 R
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2016/01/04/2016-01-04-ros-17-record_and_playback_data/2016-01-04-ros-17-record_and_playback_data/">ROS Study 017. Recording and playing back data</a>
+        <a href="/2016/01/04/2016-01-04-ros-7-using_rqtconsole_and_roslaunch/2016-01-04-ros-7-using_rqtconsole_and_roslaunch/">ROS Study 007. Using rqt_console and roslaunch</a>
         </h1>
     
 
         <p class="article-excerpt">
-            Description: This tutorial will teach you how to record data from a running ROS system into a .bag file, and then to play back the data to produce similar behavior in a running system.
-Keywords: data,
+            Prerequisites rqt and turtlesim package1sudo apt-get install ros-&lt;distro&gt;-rqt ros-&lt;distro&gt;-rqt-common-plugins ros-&lt;distro&gt;-turtlesim
+rqt_console &amp; rqt_logger_levelrqt_console 은 R
         </p>
     </div>
 </article>
@@ -337,18 +337,16 @@ Keywords: data,
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2016/01/03/2016-01-03-ros-5-topic/2016-01-03-ros-5-topic/">ROS Study 005. Topics</a>
+        <a href="/2016/01/03/2016-01-03-ros-6-service-and-parameter/2016-01-03-ros-6-service-and-parameter/">ROS Study 006. Services and Parameters</a>
         </h1>
     
 
         <p class="article-excerpt">
-            ###토픽
+            ###서비스토픽은 발행자가 중단하지 않는이상 지속적으로 메세지를 주고받는다.하지만 서비스는 일회성으로 연결 - 서비스요청 - 서비스응답 - 하고 닫는다.다시 통신하려면 연결부터 시작해야한다.
+rosservice
 
-rostopic echo [토픽이름] 토픽에서 주고 받는 내용 출력
-rostopic list 현재 활성화된 토픽들의 리스트를 본다.
-rostopic pub [토픽] [메세지타입] [데이터]    해당토픽에 메세지를 발행한다.
-rosrun rqt_graph rqt_graph 현재 노드들과 토픽들에 대해서 그래프를 그려준다.
-rostopic typ
+rosservice call [service] [args] 서비스를 아규먼트와 함께 요청한다.
+rosservice call /clear 를 실행시
         </p>
     </div>
 </article>
@@ -370,16 +368,18 @@ rostopic typ
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2016/01/03/2016-01-03-ros-6-service-and-parameter/2016-01-03-ros-6-service-and-parameter/">ROS Study 006. Services and Parameters</a>
+        <a href="/2016/01/03/2016-01-03-ros-5-topic/2016-01-03-ros-5-topic/">ROS Study 005. Topics</a>
         </h1>
     
 
         <p class="article-excerpt">
-            ###서비스토픽은 발행자가 중단하지 않는이상 지속적으로 메세지를 주고받는다.하지만 서비스는 일회성으로 연결 - 서비스요청 - 서비스응답 - 하고 닫는다.다시 통신하려면 연결부터 시작해야한다.
-rosservice
+            ###토픽
 
-rosservice call [service] [args] 서비스를 아규먼트와 함께 요청한다.
-rosservice call /clear 를 실행시
+rostopic echo [토픽이름] 토픽에서 주고 받는 내용 출력
+rostopic list 현재 활성화된 토픽들의 리스트를 본다.
+rostopic pub [토픽] [메세지타입] [데이터]    해당토픽에 메세지를 발행한다.
+rosrun rqt_graph rqt_graph 현재 노드들과 토픽들에 대해서 그래프를 그려준다.
+rostopic typ
         </p>
     </div>
 </article>
@@ -494,8 +494,17 @@ rosservice call /clear 를 실행시
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/development/">development</a></p>
-                            <p class="item-title"><a href="/2018/03/16/2016-08-18-093029-docker-swarm-study/2016-08-18-093029-docker-swarm-study/" class="title">Docker Swarm Study</a></p>
-                            <p class="item-date"><time datetime="2018-03-16T07:10:31.028Z" itemprop="datePublished">2018-03-16</time></p>
+                            <p class="item-title"><a href="/2018/03/30/2016-08-18-093029-docker-swarm-study/2016-08-18-093029-docker-swarm-study/" class="title">Docker Swarm Study</a></p>
+                            <p class="item-date"><time datetime="2018-03-30T09:30:30.048Z" itemprop="datePublished">2018-03-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/development/">development</a></p>
+                            <p class="item-title"><a href="/2018/03/30/2018-03-30-180144-cron-on-nodejs/2018-03-30-180144-cron-on-nodejs/" class="title">cron-on-nodejs</a></p>
+                            <p class="item-date"><time datetime="2018-03-30T09:01:44.000Z" itemprop="datePublished">2018-03-30</time></p>
                         </div>
                     </li>
                 
@@ -526,15 +535,6 @@ rosservice call /clear 를 실행시
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/development/">development</a></p>
-                            <p class="item-title"><a href="/2017/09/04/2017-09-04-093944-my-job-philosophy/2017-09-04-093944-my-job-philosophy/" class="title">my-job-philosophy</a></p>
-                            <p class="item-date"><time datetime="2017-09-04T00:39:44.000Z" itemprop="datePublished">2017-09-04</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -544,7 +544,7 @@ rosservice call /clear 를 실행시
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/design/">design</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/development/">development</a><span class="category-list-count">61</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/review/">review</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/uncategorized/">uncategorized</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/design/">design</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/development/">development</a><span class="category-list-count">62</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/review/">review</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/uncategorized/">uncategorized</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -554,7 +554,7 @@ rosservice call /clear 를 실행시
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">4</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">4</span></li></ul>
         </div>
     </div>
 
