@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>esm-on-nodejs | NoizBuster</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="" />
+    
+    <meta name="description" content="동기EcmaScrit Module 가 explorer 를 제외한 메이저 브라우저에서 모두 지원이 되는 마당에 코드 재활용성 문제도 있고 해서 ESM 스타일로 일부 코드가 작성되었을 경우 nodejs 프로젝트에서도 사용하고 싶게 되었다.물론 nodejs 의 고유기능들을 사용하려면 (package.js관련된것이나, 배터리 패키지들) ESM 스타일로 코드를 짠들">
+<meta property="og:type" content="article">
+<meta property="og:title" content="esm-on-nodejs">
+<meta property="og:url" content="http://noizbuster.com/2019/01/09/2019-01-09-135737-esm-on-nodejs/2019-01-09-135737-esm-on-nodejs/index.html">
+<meta property="og:site_name" content="NoizBuster">
+<meta property="og:description" content="동기EcmaScrit Module 가 explorer 를 제외한 메이저 브라우저에서 모두 지원이 되는 마당에 코드 재활용성 문제도 있고 해서 ESM 스타일로 일부 코드가 작성되었을 경우 nodejs 프로젝트에서도 사용하고 싶게 되었다.물론 nodejs 의 고유기능들을 사용하려면 (package.js관련된것이나, 배터리 패키지들) ESM 스타일로 코드를 짠들">
+<meta property="og:updated_time" content="2019-01-10T01:57:13.567Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="esm-on-nodejs">
+<meta name="twitter:description" content="동기EcmaScrit Module 가 explorer 를 제외한 메이저 브라우저에서 모두 지원이 되는 마당에 코드 재활용성 문제도 있고 해서 ESM 스타일로 일부 코드가 작성되었을 경우 nodejs 프로젝트에서도 사용하고 싶게 되었다.물론 nodejs 의 고유기능들을 사용하려면 (package.js관련된것이나, 배터리 패키지들) ESM 스타일로 코드를 짠들">
+<meta name="twitter:creator" content="@noizbuster">
+<meta property="fb:admins" content="noizbuster">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <script type="text/javascript">
+(function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-84347291-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+    
+    
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">Home</a>
+                                </li>
+                            
+                                        <ul class="main-nav-list"><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/design/">design</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/development/">development</a></li><li class="main-nav-list-item"><a class="main-nav-list-link" href="/categories/review/">review</a></li></ul>
+                                    
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">About</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/development/">development</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-2019-01-09-135737-esm-on-nodejs/2019-01-09-135737-esm-on-nodejs" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        esm-on-nodejs
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/2019/01/09/2019-01-09-135737-esm-on-nodejs/2019-01-09-135737-esm-on-nodejs/" class="article-date">
+    <time datetime="2019-01-09T04:57:37.000Z" itemprop="datePublished">2019-01-09</time>
+</a>
+                
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h1 id="동기"><a href="#동기" class="headerlink" title="동기"></a>동기</h1><p>EcmaScrit Module 가 explorer 를 제외한 메이저 브라우저에서 모두 지원이 되는 마당에 코드 재활용성 문제도 있고 해서 ESM 스타일로 일부 코드가 작성되었을 경우 nodejs 프로젝트에서도 사용하고 싶게 되었다.<br>물론 nodejs 의 고유기능들을 사용하려면 (package.js관련된것이나, 배터리 패키지들) ESM 스타일로 코드를 짠들 브라우저 호환성을 보장 할 수 없지만 전체 코드베이스에서 이런 디펜던시를 가지는 파일들이 몇개나 되는지 생각해보면 적용 할 가치는 충분하다고 생각하고, 시간이 지날수록 더욱 중요해 질것이라고 기대한다.</p>
+<h5 id="javascript-호환성-관련-자료"><a href="#javascript-호환성-관련-자료" class="headerlink" title="javascript 호환성 관련 자료"></a>javascript 호환성 관련 자료</h5><ul>
+<li><a href="https://www.w3schools.com/js/js_versions.asp" target="_blank" rel="external">https://www.w3schools.com/js/js_versions.asp</a></li>
+<li><a href="https://caniuse.com/#tables" target="_blank" rel="external">https://caniuse.com/#tables</a></li>
+<li><a href="https://node.green/" target="_blank" rel="external">https://node.green/</a></li>
+</ul>
+<h5 id="비슷한-주제의-읽을거리"><a href="#비슷한-주제의-읽을거리" class="headerlink" title="비슷한 주제의 읽을거리"></a>비슷한 주제의 읽을거리</h5><ul>
+<li><a href="https://gist.github.com/WebReflection/a4e026e78af45ede8d0f7498cab44f91" target="_blank" rel="external">Solving the “ESM in NodeJS” Odyssey.</a></li>
+</ul>
+<h1 id="방법"><a href="#방법" class="headerlink" title="방법"></a>방법</h1><p>여러가지 방법이 있지만 시도해본 메이져한 방법들 각각의 장점, 한계점에 대해 이야기를 해 보겠다.</p>
+<h2 id="1-babel-build"><a href="#1-babel-build" class="headerlink" title="1. babel build"></a>1. babel build</h2><p>아예 프로젝트 전체를 트랜스파일링 해서 ES5 나 ES6 로 빌드해버리는 방법</p>
+<h3 id="장점"><a href="#장점" class="headerlink" title="장점"></a>장점</h3><ul>
+<li>nodejs 뿐만 아니라 브라우저에서의 동작도 보장할 수 있다.</li>
+</ul>
+<h3 id="단점"><a href="#단점" class="headerlink" title="단점"></a>단점</h3><ul>
+<li>빌드시간이 오래걸린다.</li>
+<li>서드파티 개발자가 디버깅할때 번거로울 수 있다.</li>
+</ul>
+<h2 id="2-nodejs-native"><a href="#2-nodejs-native" class="headerlink" title="2. nodejs native"></a>2. nodejs native</h2><p>nodejs native ESM 호환 기능을 사용함<br>–experimental-modules </p>
+<h3 id="장점-1"><a href="#장점-1" class="headerlink" title="장점"></a>장점</h3><ul>
+<li>별도의 빌드 과정을 만들고 관리하지 않아도 됨</li>
+<li>있는파일 그대로 가지고 디버깅 할 수 있음</li>
+</ul>
+<h3 id="단점-1"><a href="#단점-1" class="headerlink" title="단점"></a>단점</h3><ul>
+<li>낮은버전의 nodejs 에서 동작을 보장하지 않음.</li>
+<li>마찬가지로 브라우저에서도 그대로 사용 할 수 없음.</li>
+<li>esm 형태로 작성된 파일은 무조건 .mjs 확장자를 사용해야함.</li>
+<li>mjs 파일 내에서는 require 를 사용 할 수 없음.<ul>
+<li>내부적으로 캐싱이 따로 되기 때문에 require 캐시를 이용하여 싱글톤 패턴처럼 사용한 경우에는 프로그램이 의도하지 않은 동작을 할 수 있음 <a href="https://nodejs.org/api/esm.html#esm_no_require_cache" target="_blank" rel="external">참고</a></li>
+</ul>
+</li>
+<li>babel 로 빌드된 모듈을 import 하거나 클래스를 상속받을때 오동작함</li>
+</ul>
+<h2 id="3-esm"><a href="#3-esm" class="headerlink" title="3. esm"></a>3. esm</h2><h3 id="장점-2"><a href="#장점-2" class="headerlink" title="장점"></a>장점</h3><ul>
+<li>mjs 확장자를 강요당하지 않음</li>
+<li>기존에 쓰던 테스트코드를 그대로 사용 할 수 있음</li>
+<li>zero configuration</li>
+<li>별도의 빌드 과정을 만들고 관리하지 않아도 됨</li>
+<li>(사용하고 싶다면) ESM파일 내에서 require 도 섞어서 쓸 수 있음. (… 근데 왜?)</li>
+</ul>
+<h3 id="단점-2"><a href="#단점-2" class="headerlink" title="단점"></a>단점</h3><ul>
+<li>babel 로 빌드된 모듈을 import 하거나 클래스를 상속받을때 오동작함</li>
+<li>파일이 nodejs 디펜던시가 있는지 없는지 분간하기 어려움 (개발자가 파일에 명시된 디펜던시를 체크해야함)<ul>
+<li>즉, 웹브라우저에서 쓸수있는 파일이 어떤것인지 명시적이지 않음.</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-babel-cli-에-포함된-babel-node"><a href="#4-babel-cli-에-포함된-babel-node" class="headerlink" title="4. @babel/cli 에 포함된 babel-node"></a>4. @babel/cli 에 포함된 babel-node</h2><h3 id="장점-3"><a href="#장점-3" class="headerlink" title="장점"></a>장점</h3><ul>
+<li>esm 과 비슷한 편의성, 빌드관리 하지 않아도 됨</li>
+<li>메모리를 더 먹는것 같음</li>
+<li>babel 로 빌드된 모듈들을 별다른 설정없이도 잘 읽어들임</li>
+<li>mjs 확장자를 강요당하지 않음</li>
+</ul>
+<h3 id="단점-3"><a href="#단점-3" class="headerlink" title="단점"></a>단점</h3><ul>
+<li>빌드시간이 오래걸린다.</li>
+<li>서드파티 개발자가 디버깅할때 번거로울 수 있다.</li>
+</ul>
+<h1 id="추가설명"><a href="#추가설명" class="headerlink" title="추가설명"></a>추가설명</h1><h5 id="nodejs-–experimental-modules-esm-에서-babel로-빌드된-패키지들이-발생시키는-문제"><a href="#nodejs-–experimental-modules-esm-에서-babel로-빌드된-패키지들이-발생시키는-문제" class="headerlink" title="nodejs –experimental-modules, esm 에서 babel로 빌드된 패키지들이 발생시키는 문제"></a>nodejs –experimental-modules, esm 에서 babel로 빌드된 패키지들이 발생시키는 문제</h5><p>구체적으로 설명하자면 babel로 빌드된 패키지들을 읽어올때 <code>default export</code> 를 제외한 export 를 제대로 인식하지 못한다.<br>또, 빌드된 class 들의 constructor 안에서 super() 를 콜하더라도 전혀 동작하지 않는것으로 보였다.</p>
+<h1 id="결론"><a href="#결론" class="headerlink" title="결론"></a>결론</h1><h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR;"></a>TL;DR;</h2><ul>
+<li>사용하는 라이브러리가 babel로 빌드되어있으면 당분간은 babel 사용이 좋음<ul>
+<li>빌드 해야하면 babel 설정</li>
+<li>그냥 실행만 시키고 싶으면 @babel/cli 설치후 babel-node 로 실행</li>
+</ul>
+</li>
+<li>사용하는/할 라이브러리가 앞으로도 babel이랑 관계가 없을것으로 기대한다면<ul>
+<li>mjs 확장자를 싫어하면 esm, </li>
+<li>써도 상관없다면 nodejs 의 –experimental-modules 를 사용</li>
+</ul>
+</li>
+</ul>
+<h2 id="고찰"><a href="#고찰" class="headerlink" title="고찰"></a>고찰</h2><h4 id="Broken-system"><a href="#Broken-system" class="headerlink" title="Broken system"></a>Broken system</h4><p>esm 이나 nodejs 자체 옵션을 이용하여 얼마든지 ESM 을 사용 할 수 있음. 그러나 이건 어디까지나 ESM 으로 작성된 파일을 사용하는데 국한된 이야기이고 babel로 빌드된 ESM 모듈을 사용하려면 결국 babel 을 사용하는게 정신건강에 이로워보임<br>브라우저에서 최신 javascript 스펙들을 지원하기 시작한 이래로 ES6^ 의 이용이 급속도로 전파되고 있는 현상이 commonjs 를 사용하는 Node.js 커뮤니티를 지속적으로, 점점 더 심하게 괴롭힐것으로 예상된다.<br>babel을 사용하고 있는 골드가 되어버린 레거시들이 너무 많은데다 안정된 자리를 차지하고 있고 TypeScript를 사용자들의 입장도 있기 때문에 새로운 커뮤니티의 합의를 이루는것은 점점 더 어려워졌다고 본다. 앞으로는 불가능하다고 보는게 옳을것이다.  </p>
+<h4 id="좋을것은-없다"><a href="#좋을것은-없다" class="headerlink" title="좋을것은 없다."></a>좋을것은 없다.</h4><p>이런 상황이 Node.js에게 위기가 될것이냐에 대해선 의문이긴 하다. 이미 Node.js 는 충분한 가치를 제공하고 있고 브라우저에서 사용되는 javascript가 commonjs 와 다름에 대해선 선을 그어놓고 있었기 때문에 혼란을 줄 염려도 적다.<br>하지만 범용으로 쓰이고 싶은 라이브러리들이 ESM을 공격적으로 받아들이고 있는데다 절대 다수의 프로젝트들이 관리상의 이유로 한가지 빌드만 만들어 npm에 배포시키고 있다. bower 가 죽어가는 마당에 이런 괴리는 점점 심해질것이고, 이런 괴리는 Node.js 의 입지에 악영향을 줄것이다.</p>
+<h4 id="How-to-solve"><a href="#How-to-solve" class="headerlink" title="How to solve"></a>How to solve</h4><p>이 문제는 Node.js 가 아니라 npm 으로 풀어야 할 문제인것 같다. 이미 –experimental-modules 나 esm 과 같은 방법으로 유저들은 Node.js 에서 ESM 을 사용하고 싶은 욕망과 그에대한 답변을 들었으며 이를 실무와 유리시키고 있는것이 트랜스파일링 이라고 본다.<br>잠깐 딴 이야기를 하자면 내가 타입스크립트를 좋아하지 않는 이유중에 하나가 type.d 파일의 존재이기도 하다. 아주 거추장스럽고 모든 서드파티들이 신경써준다는 보장도 없다. 버전별로 관리가 될것이라고 기대하는것은 당연히 오산이다.<br>이에 나는 npm 이 flavor 별로 배포를 다양화 할 수 있는 방법을 제공해야 한다고 생각한다.<br>ts, esm, cjs, 지금은 자취를 많이 감춘 coffeescript 등으로 배포를 할 수 있게 만들어야 한다. 일단 그렇게 된다면 앞서 이야기한 babel이 필요없음에도 사용을 강요당한다거나 type.d 파일을 따로 배포한다거나 하는 요상한 일이 일어나지 않을것이고 어떤 패키지가 어떤 환경을 지원하는지 구분하기도 쉬워지고, 때론 이것들이 뒤섞여서 발생하는 오동작이나 어려워지는 테스팅문제가 일부 해결 될 수도 있다.</p>
+<h4 id="맺으며"><a href="#맺으며" class="headerlink" title="맺으며"></a>맺으며</h4><p>Node.js 를 2014년부터 써왔지만 드디어 다 긁어먹고 바닥이 보인다는 느낌이다.<br>내 자신감과는 별개로 내자신에 대한 나의 평가는 남들이 생각하는것보다 박한편인데도 불구하고, 이제는 어디가서 expert 라고 이야기를 해도 되지 않을까 하는 생각마저 최근 들고 있다.<br>그래도 이래저래 편하게 쓰고있는 플랫폼인데 롱런했으면 좋겠다.</p>
+
+        </div>
+        <footer class="article-footer">
+            
+
+
+
+    <a data-url="http://noizbuster.com/2019/01/09/2019-01-09-135737-esm-on-nodejs/2019-01-09-135737-esm-on-nodejs/" data-id="cjqpyqkzr0058cjw3id71e7kx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>follow:</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="twitter" href="http://twitter.com/noizbuster" target="_blank">
+                        <i class="icon fa fa-twitter"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="facebook" href="http://facebook.com/noizbuster" target="_blank">
+                        <i class="icon fa fa-facebook"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="linkedin" href="https://www.linkedin.com/in/wonwoo-yang-1433b69a" target="_blank">
+                        <i class="icon fa fa-linkedin"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="gitlab" href="https://gitlab.com/u/noizbuster" target="_blank">
+                        <i class="icon fa fa-gitlab"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/noizbuster" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/11/19/2018-11-19-161357-js-documentation/2018-11-19-161357-js-documentation/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">older</strong>
+        <p class="article-nav-title">js-documentation</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">recents</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/development/">development</a></p>
+                            <p class="item-title"><a href="/2019/01/09/2019-01-09-135737-esm-on-nodejs/2019-01-09-135737-esm-on-nodejs/" class="title">esm-on-nodejs</a></p>
+                            <p class="item-date"><time datetime="2019-01-09T04:57:37.000Z" itemprop="datePublished">2019-01-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/development/">development</a></p>
+                            <p class="item-title"><a href="/2018/11/19/2018-11-19-161357-js-documentation/2018-11-19-161357-js-documentation/" class="title">js-documentation</a></p>
+                            <p class="item-date"><time datetime="2018-11-19T07:13:57.000Z" itemprop="datePublished">2018-11-19</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/development/">development</a></p>
+                            <p class="item-title"><a href="/2018/08/23/2018-08-23-162836-errorhandling-async-express-router/2018-08-23-162836-errorhandling-async-express-router/" class="title">errorhandling-async-express-router</a></p>
+                            <p class="item-date"><time datetime="2018-08-23T07:28:36.000Z" itemprop="datePublished">2018-08-23</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/development/">development</a></p>
+                            <p class="item-title"><a href="/2018/03/30/2018-03-30-180144-cron-on-nodejs/2018-03-30-180144-cron-on-nodejs/" class="title">cron-on-nodejs</a></p>
+                            <p class="item-date"><time datetime="2018-03-30T09:01:44.000Z" itemprop="datePublished">2018-03-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/development/">development</a></p>
+                            <p class="item-title"><a href="/2018/03/12/2018-03-12-145933-survey-nodejs-config-package/2018-03-12-145933-survey-nodejs-config-package/" class="title">survey-nodejs-config-package</a></p>
+                            <p class="item-date"><time datetime="2018-03-12T05:59:33.000Z" itemprop="datePublished">2018-03-12</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/design/">design</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/development/">development</a><span class="category-list-count">59</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/review/">review</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">4</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/actionhero/">actionhero</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular/">angular</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular1-5/">angular1.5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/angular2/">angular2</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/api/">api</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apt/">apt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/audio/">audio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/authentication/">authentication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/">blog</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cd/">cd</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/celery/">celery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci/">ci</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/comet/">comet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/commonmark/">commonmark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/container/">container</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/convention/">convention</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/design/">design</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/diy/">diy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/documentation/">documentation</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/earphone/">earphone</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/frontend/">frontend</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gigabyte/">gigabyte</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ide/">ide</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/idea/">idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jekyll/">jekyll</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jenkins/">jenkins</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jenkins2/">jenkins2</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsdoc/">jsdoc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kobuki/">kobuki</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laptop/">laptop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/library/">library</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logo/">logo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/logpolling/">logpolling</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/loopback/">loopback</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mapping-table/">mapping table</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mariadb/">mariadb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markup/">markup</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/micro-service-architecture/">micro service architecture</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/msa/">msa</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/naming-convention/">naming convention</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/noizbuster/">noizbuster</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openapi/">openapi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/os/">os</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ova/">ova</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/p34w-v3/">p34w v3</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/package/">package</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/package-management/">package management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/phiaton/">phiaton</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/polling/">polling</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/promise/">promise</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/protocol/">protocol</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-flask/">python flask</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/raspberryPi/">raspberryPi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redemption/">redemption</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rest/">rest</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/restful/">restful</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/robot/">robot</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ros/">ros</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rust/">rust</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/security/">security</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/semantic/">semantic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/semver/">semver</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/service-discovery/">service discovery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/staticgen/">staticgen</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/staticweb/">staticweb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stemcell/">stemcell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swagger/">swagger</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swagger-ui/">swagger-ui</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/swarm/">swarm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/transaction/">transaction</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/versioning/">versioning</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualbox/">virtualbox</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtualenv/">virtualenv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/visualstudio/">visualstudio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vm/">vm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/">web</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webstorm/">webstorm</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yaml/">yaml</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/actionhero/" style="font-size: 10px;">actionhero</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/angular1-5/" style="font-size: 10px;">angular1.5</a> <a href="/tags/angular2/" style="font-size: 12px;">angular2</a> <a href="/tags/api/" style="font-size: 10px;">api</a> <a href="/tags/apt/" style="font-size: 10px;">apt</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/audio/" style="font-size: 10px;">audio</a> <a href="/tags/authentication/" style="font-size: 10px;">authentication</a> <a href="/tags/blog/" style="font-size: 12px;">blog</a> <a href="/tags/cd/" style="font-size: 12px;">cd</a> <a href="/tags/celery/" style="font-size: 10px;">celery</a> <a href="/tags/ci/" style="font-size: 12px;">ci</a> <a href="/tags/comet/" style="font-size: 10px;">comet</a> <a href="/tags/commonmark/" style="font-size: 10px;">commonmark</a> <a href="/tags/container/" style="font-size: 10px;">container</a> <a href="/tags/convention/" style="font-size: 10px;">convention</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/design/" style="font-size: 10px;">design</a> <a href="/tags/diy/" style="font-size: 10px;">diy</a> <a href="/tags/docker/" style="font-size: 14px;">docker</a> <a href="/tags/documentation/" style="font-size: 12px;">documentation</a> <a href="/tags/earphone/" style="font-size: 10px;">earphone</a> <a href="/tags/frontend/" style="font-size: 10px;">frontend</a> <a href="/tags/gigabyte/" style="font-size: 10px;">gigabyte</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/ide/" style="font-size: 10px;">ide</a> <a href="/tags/idea/" style="font-size: 10px;">idea</a> <a href="/tags/javascript/" style="font-size: 12px;">javascript</a> <a href="/tags/jekyll/" style="font-size: 12px;">jekyll</a> <a href="/tags/jenkins/" style="font-size: 12px;">jenkins</a> <a href="/tags/jenkins2/" style="font-size: 12px;">jenkins2</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/jsdoc/" style="font-size: 10px;">jsdoc</a> <a href="/tags/kobuki/" style="font-size: 10px;">kobuki</a> <a href="/tags/laptop/" style="font-size: 10px;">laptop</a> <a href="/tags/library/" style="font-size: 10px;">library</a> <a href="/tags/linux/" style="font-size: 12px;">linux</a> <a href="/tags/logo/" style="font-size: 10px;">logo</a> <a href="/tags/logpolling/" style="font-size: 10px;">logpolling</a> <a href="/tags/loopback/" style="font-size: 10px;">loopback</a> <a href="/tags/mapping-table/" style="font-size: 10px;">mapping table</a> <a href="/tags/mariadb/" style="font-size: 10px;">mariadb</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/markup/" style="font-size: 10px;">markup</a> <a href="/tags/micro-service-architecture/" style="font-size: 14px;">micro service architecture</a> <a href="/tags/mongodb/" style="font-size: 12px;">mongodb</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/msa/" style="font-size: 18px;">msa</a> <a href="/tags/naming-convention/" style="font-size: 10px;">naming convention</a> <a href="/tags/node/" style="font-size: 12px;">node</a> <a href="/tags/nodejs/" style="font-size: 16px;">nodejs</a> <a href="/tags/noizbuster/" style="font-size: 10px;">noizbuster</a> <a href="/tags/npm/" style="font-size: 12px;">npm</a> <a href="/tags/openapi/" style="font-size: 10px;">openapi</a> <a href="/tags/os/" style="font-size: 10px;">os</a> <a href="/tags/ova/" style="font-size: 10px;">ova</a> <a href="/tags/p34w-v3/" style="font-size: 10px;">p34w v3</a> <a href="/tags/package/" style="font-size: 10px;">package</a> <a href="/tags/package-management/" style="font-size: 10px;">package management</a> <a href="/tags/phiaton/" style="font-size: 10px;">phiaton</a> <a href="/tags/polling/" style="font-size: 10px;">polling</a> <a href="/tags/promise/" style="font-size: 10px;">promise</a> <a href="/tags/protocol/" style="font-size: 10px;">protocol</a> <a href="/tags/python/" style="font-size: 14px;">python</a> <a href="/tags/python-flask/" style="font-size: 10px;">python flask</a> <a href="/tags/raspberryPi/" style="font-size: 10px;">raspberryPi</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/redemption/" style="font-size: 10px;">redemption</a> <a href="/tags/rest/" style="font-size: 10px;">rest</a> <a href="/tags/restful/" style="font-size: 10px;">restful</a> <a href="/tags/robot/" style="font-size: 20px;">robot</a> <a href="/tags/ros/" style="font-size: 20px;">ros</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/security/" style="font-size: 10px;">security</a> <a href="/tags/semantic/" style="font-size: 10px;">semantic</a> <a href="/tags/semver/" style="font-size: 10px;">semver</a> <a href="/tags/service-discovery/" style="font-size: 10px;">service discovery</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/staticgen/" style="font-size: 10px;">staticgen</a> <a href="/tags/staticweb/" style="font-size: 10px;">staticweb</a> <a href="/tags/stemcell/" style="font-size: 10px;">stemcell</a> <a href="/tags/swagger/" style="font-size: 10px;">swagger</a> <a href="/tags/swagger-ui/" style="font-size: 10px;">swagger-ui</a> <a href="/tags/swarm/" style="font-size: 10px;">swarm</a> <a href="/tags/transaction/" style="font-size: 10px;">transaction</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/versioning/" style="font-size: 10px;">versioning</a> <a href="/tags/virtualbox/" style="font-size: 12px;">virtualbox</a> <a href="/tags/virtualenv/" style="font-size: 10px;">virtualenv</a> <a href="/tags/visualstudio/" style="font-size: 10px;">visualstudio</a> <a href="/tags/vm/" style="font-size: 10px;">vm</a> <a href="/tags/web/" style="font-size: 20px;">web</a> <a href="/tags/webstorm/" style="font-size: 12px;">webstorm</a> <a href="/tags/yaml/" style="font-size: 10px;">yaml</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://www.noizbuster.com">Noizbuster.com</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p>&copy; 2019 noizbuster</p>
+                <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_shortname = 'noizbuster';
+    
+    
+    var disqus_url = 'http://noizbuster.com/2019/01/09/2019-01-09-135737-esm-on-nodejs/2019-01-09-135737-esm-on-nodejs/';
+    
+    (function() {
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
