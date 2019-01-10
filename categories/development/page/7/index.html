@@ -159,18 +159,16 @@ ga('send', 'pageview');
         
     
         <h1 class="article-title" itemprop="name">
-        <a href="/2016/01/03/2016-01-03-ros-5-topic/2016-01-03-ros-5-topic/">ROS Study 005. Topics</a>
+        <a href="/2016/01/03/2016-01-03-ros-6-service-and-parameter/2016-01-03-ros-6-service-and-parameter/">ROS Study 006. Services and Parameters</a>
         </h1>
     
 
         <p class="article-excerpt">
-            ###토픽
+            ###서비스토픽은 발행자가 중단하지 않는이상 지속적으로 메세지를 주고받는다.하지만 서비스는 일회성으로 연결 - 서비스요청 - 서비스응답 - 하고 닫는다.다시 통신하려면 연결부터 시작해야한다.
+rosservice
 
-rostopic echo [토픽이름] 토픽에서 주고 받는 내용 출력
-rostopic list 현재 활성화된 토픽들의 리스트를 본다.
-rostopic pub [토픽] [메세지타입] [데이터]    해당토픽에 메세지를 발행한다.
-rosrun rqt_graph rqt_graph 현재 노드들과 토픽들에 대해서 그래프를 그려준다.
-rostopic typ
+rosservice call [service] [args] 서비스를 아규먼트와 함께 요청한다.
+rosservice call /clear 를 실행시
         </p>
     </div>
 </article>
@@ -446,15 +444,6 @@ Release 디렉토리 (솔루션, 프로젝트 경로상 모두)
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/development/">development</a></p>
-                            <p class="item-title"><a href="/2019/01/10/2016-08-18-093029-docker-swarm-study/2016-08-18-093029-docker-swarm-study/" class="title">Docker Swarm Study</a></p>
-                            <p class="item-date"><time datetime="2019-01-10T01:49:14.131Z" itemprop="datePublished">2019-01-10</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/development/">development</a></p>
                             <p class="item-title"><a href="/2018/11/19/2018-11-19-161357-js-documentation/2018-11-19-161357-js-documentation/" class="title">js-documentation</a></p>
                             <p class="item-date"><time datetime="2018-11-19T07:13:57.000Z" itemprop="datePublished">2018-11-19</time></p>
                         </div>
@@ -487,6 +476,15 @@ Release 디렉토리 (솔루션, 프로젝트 경로상 모두)
                         </div>
                     </li>
                 
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/development/">development</a></p>
+                            <p class="item-title"><a href="/2018/03/30/2018-03-30-180144-cron-on-nodejs/2018-03-30-180144-cron-on-nodejs/" class="title">cron-on-nodejs</a></p>
+                            <p class="item-date"><time datetime="2018-03-30T09:01:44.000Z" itemprop="datePublished">2018-03-30</time></p>
+                        </div>
+                    </li>
+                
             </ul>
         </div>
     </div>
@@ -506,7 +504,7 @@ Release 디렉토리 (솔루션, 프로젝트 경로상 모두)
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">4</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">4</span></li></ul>
         </div>
     </div>
 
