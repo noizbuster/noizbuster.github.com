@@ -3,24 +3,15 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Docker Swarm Study | NoizBuster</title>
+    <title>Archive: 2019/1 | NoizBuster</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
-        <meta name="keywords" content="docker,swarm,container" />
-    
-    <meta name="description" content="Introduction동기이제 슬슬 시스템에 서비스들이 많아지면서 Orchestration을 신경써야 할 필요성이 대두되었다.
-supervisor 등의 툴을 사용해서 관리하고 있었지만 sigterm을 맞고도 바로 죽지 않는 컨테이너가 있는 등 문제가 다소 있었고, 이것을 dockerfile 에서 해결하거나 entrypoint 를 스크립트로 잡고 인위적으로">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Docker Swarm Study">
-<meta property="og:url" content="http://noizbuster.com/2018/11/22/2016-08-18-093029-docker-swarm-study/2016-08-18-093029-docker-swarm-study/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="NoizBuster">
+<meta property="og:url" content="http://noizbuster.com/archives/2019/01/index.html">
 <meta property="og:site_name" content="NoizBuster">
-<meta property="og:description" content="Introduction동기이제 슬슬 시스템에 서비스들이 많아지면서 Orchestration을 신경써야 할 필요성이 대두되었다.
-supervisor 등의 툴을 사용해서 관리하고 있었지만 sigterm을 맞고도 바로 죽지 않는 컨테이너가 있는 등 문제가 다소 있었고, 이것을 dockerfile 에서 해결하거나 entrypoint 를 스크립트로 잡고 인위적으로">
-<meta property="og:updated_time" content="2017-03-14T02:03:58.081Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker Swarm Study">
-<meta name="twitter:description" content="Introduction동기이제 슬슬 시스템에 서비스들이 많아지면서 Orchestration을 신경써야 할 필요성이 대두되었다.
-supervisor 등의 툴을 사용해서 관리하고 있었지만 sigterm을 맞고도 바로 죽지 않는 컨테이너가 있는 등 문제가 다소 있었고, 이것을 dockerfile 에서 해결하거나 entrypoint 를 스크립트로 잡고 인위적으로">
+<meta name="twitter:title" content="NoizBuster">
 <meta name="twitter:creator" content="@noizbuster">
 <meta property="fb:admins" content="noizbuster">
     
@@ -136,143 +127,56 @@ ga('send', 'pageview');
                         <div class="main-body-header">
     <h1 class="header">
     
-    <a class="page-title-link" href="/categories/development/">development</a>
+    <i class="icon fa fa-archive"></i>Archive: 2019/1
     </h1>
 </div>
                         <div class="main-body-content">
-                            <article id="post-2016-08-18-093029-docker-swarm-study/2016-08-18-093029-docker-swarm-study" class="article article-single article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
+                            
+
+    
+    
         
-            <header class="article-header">
-                
+        
+        <section class="archives-wrap">
+            <div class="archive-year-wrap">
+                <a href="/archives/2019" class="archive-year"><i class="icon fa fa-calendar-o"></i>2019</a>
+            </div>
+            <div class="archives">
+    
+    
+    
+        <div class="article-row">
+    
+        <article class="article article-summary">
+    <div class="article-summary-inner">
+        
+        <div class="article-meta">
+            <p class="category">
+            <a class="article-category-link" href="/categories/development/">development</a>
+            </p>
+            <p class="date"><time datetime="2019-01-10T01:49:14.131Z" itemprop="datePublished">2019-01-10</time></p>
+        </div>
+        
     
         <h1 class="article-title" itemprop="name">
-        Docker Swarm Study
+        <a href="/2019/01/10/2016-08-18-093029-docker-swarm-study/2016-08-18-093029-docker-swarm-study/">Docker Swarm Study</a>
         </h1>
     
 
-            </header>
-        
-        
-            <div class="article-subtitle">
-                <a href="/2018/11/22/2016-08-18-093029-docker-swarm-study/2016-08-18-093029-docker-swarm-study/" class="article-date">
-    <time datetime="2018-11-22T08:05:27.048Z" itemprop="datePublished">2018-11-22</time>
-</a>
-                
-    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/container/">container</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/swarm/">swarm</a></li></ul>
-
-            </div>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-            <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="동기"><a href="#동기" class="headerlink" title="동기"></a>동기</h3><p>이제 슬슬 시스템에 서비스들이 많아지면서 Orchestration을 신경써야 할 필요성이 대두되었다.</p>
-<p>supervisor 등의 툴을 사용해서 관리하고 있었지만 sigterm을 맞고도 바로 죽지 않는 컨테이너가 있는 등 문제가 다소 있었고, 이것을 dockerfile 에서 해결하거나 entrypoint 를 스크립트로 잡고 인위적으로 내부의 pid를 관리해야 하는것이 부자연스럽다고 생각하던 차였다.</p>
-<h3 id="Container-Orchestration-Tools"><a href="#Container-Orchestration-Tools" class="headerlink" title="Container Orchestration Tools"></a>Container Orchestration Tools</h3><p>Container를 Orchestration 해주는 툴들은 근래에 와서 많이 늘어났다.</p>
-<p><a href="https://www.linux.com/news/8-open-source-container-orchestration-tools-know" target="_blank" rel="external">8 Container Orchestration Tools to Know</a> 를 보면 주요한 툴들을 잘 설명 해놨다.<br>요약하자면</p>
-<ul>
-<li><strong>ECS</strong> : Amazon EC2 자체 솔루션</li>
-<li><strong>ACS</strong> : MS Azure 자체 솔루션</li>
-<li>Cloud Foundry’s <strong>Diego</strong> : 스케쥴러 등과 함께 제공된다.</li>
-<li>CoreOS <strong>Fleet</strong> : CoreOS에 최적화된 Docker Management 툴.<ul>
-<li>자체적으로 클라우드를 구성하는 입장이 된다면 이걸 쓰지 않을까 싶다.</li>
-</ul>
-</li>
-<li><strong>Google Container Engine</strong> : Google Cloud platform에서 사용함. Kubernetes 를 기반으로 만들어져있다.</li>
-<li><strong>Kubernetes</strong> : Google 에서 만든 컨테이너 매니징툴. 2014년정도엔 이만한게 없었다.</li>
-<li><strong>Mesosphere Marathon</strong> : Apache Mesos 위에서 돌아가는 도커 프레임워크다.</li>
-<li>Docker <strong>Swarm</strong> : 하나의 가상 도커 엔진에 여러개의 도커 엔진을 그룹으로 묶어서 운용할 수 있다. 네이티브 클러스터링을 지원한다. 도커팀이 공식적으로 밀고 있는 툴이기 때문에 다른애들은 못하는걸 제공한다.</li>
-</ul>
-<h3 id="기술선정"><a href="#기술선정" class="headerlink" title="기술선정"></a>기술선정</h3><p>일단 소거법으로 접근해보았다.</p>
-<p>ECS, ACS 등은 특정 서비스 프로바이더에 비인딩 되기 때문에 나중에 다른데로 마이그레이트 할때 비용이 발생하며, 복수의 서비스 프로바이더나 온프로미스를 섞어서 헤테로지니어스한 시스템을 구성하기가 사실상 어렵다.<br>Mesosphere Marathon은 Mesos에 바인드 된다. 우리는 배포시에 ansible 을 쓰기 때문에 이거까지 별도로 올려서 쓸일이 있을까 싶다.<br>Fleet 의 경우엔 역사가 짧고 CoreOS에 바인드 되어서 패스하기로 했다.  </p>
-<p>이리하여 Kubernates 와 docker swarm 간에서 고민을 하게 되었는데.<br>우리의 경우엔 기존에 있는 바닐라 컨테이너들을 묶어서 한번에 켜는일이 많기 때문에 swarm 이 좀 더 매력적으로 보였고 documentation이 잘 되어있으며, docker 팀에서 밀고있는 툴이기 때문에 유지보수에 관한 걱정도 없었다.<br>물론 kubernates 를 이용하면 성능이나 부하를 파라미터화 해서 엘라스틱하게 운용하기 쉽다는 장점이 있으나 우리의 시스템은 그렇게 고 가용성을 요구하는것도 아니고 클러스터링은 스웜도 네이티브로 지원하기 때문에 손해볼것 없다는 판단을 하였다.</p>
-<h2 id="Docker-Swarm"><a href="#Docker-Swarm" class="headerlink" title="Docker Swarm"></a>Docker Swarm</h2><p><del>나는 군단이다</del><br><a href="https://docs.docker.com/swarm/" target="_blank" rel="external">docs.docker.com/swarm</a> 에 문서화가 잘 되어있다.</p>
-<h3 id="Installation-amp-Execution"><a href="#Installation-amp-Execution" class="headerlink" title="Installation &amp; Execution"></a>Installation &amp; Execution</h3><p>binary를 설치하기 보다는 docker image 를 그냥 시작 하라고 추천하고 있다.<br>swarm 에 기여할게 아니면 전혀 상관이 없는모양</p>
-<p>다음 명령어로 원큐에 설치부터 실행까지 된다.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run swarm</div></pre></td></tr></table></figure></p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
-<li><a href="https://www.quora.com/What-is-the-best-Docker-Linux-Container-orchestration-tool" target="_blank" rel="external">https://www.quora.com/What-is-the-best-Docker-Linux-Container-orchestration-tool</a></li>
-<li><a href="https://www.linux.com/news/5-next-gen-cloud-technologies-you-should-know" target="_blank" rel="external">https://www.linux.com/news/5-next-gen-cloud-technologies-you-should-know</a></li>
-<li><a href="https://docs.docker.com/swarm/" target="_blank" rel="external">https://docs.docker.com/swarm/</a></li>
-</ul>
-
-        </div>
-        <footer class="article-footer">
-            
-
-
-
-    <a data-url="http://noizbuster.com/2018/11/22/2016-08-18-093029-docker-swarm-study/2016-08-18-093029-docker-swarm-study/" data-id="cjosbau0t003fckw3j0q8nrr5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-        </footer>
+        <p class="article-excerpt">
+            Introduction동기이제 슬슬 시스템에 서비스들이 많아지면서 Orchestration을 신경써야 할 필요성이 대두되었다.
+supervisor 등의 툴을 사용해서 관리하고 있었지만 sigterm을 맞고도 바로 죽지 않는 컨테이너가 있는 등 문제가 다소 있었고, 이것을 dockerfile 에서 해결하거나 entrypoint 를 스크립트로 잡고 인위적으로 
+        </p>
     </div>
 </article>
-
-    <section id="comments">
     
-        
-    <div id="disqus_thread">
-        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-
+        </div>
     
-    </section>
+
+
+    </div></section>
+
+
 
                         </div>
                     </section>
@@ -325,19 +229,6 @@ ga('send', 'pageview');
         </ul>
     </div>
     
-        
-<nav id="article-nav">
-    
-    
-        <a href="/2018/11/19/2018-11-19-161357-js-documentation/2018-11-19-161357-js-documentation/" id="article-nav-older" class="article-nav-link-wrap">
-        <strong class="article-nav-caption">older</strong>
-        <p class="article-nav-title">js-documentation</p>
-        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
-        </a>
-    
-</nav>
-
-    
     <div class="widgets-container">
         
             
@@ -351,8 +242,8 @@ ga('send', 'pageview');
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/development/">development</a></p>
-                            <p class="item-title"><a href="/2018/11/22/2016-08-18-093029-docker-swarm-study/2016-08-18-093029-docker-swarm-study/" class="title">Docker Swarm Study</a></p>
-                            <p class="item-date"><time datetime="2018-11-22T08:05:27.048Z" itemprop="datePublished">2018-11-22</time></p>
+                            <p class="item-title"><a href="/2019/01/10/2016-08-18-093029-docker-swarm-study/2016-08-18-093029-docker-swarm-study/" class="title">Docker Swarm Study</a></p>
+                            <p class="item-date"><time datetime="2019-01-10T01:49:14.131Z" itemprop="datePublished">2019-01-10</time></p>
                         </div>
                     </li>
                 
@@ -411,7 +302,7 @@ ga('send', 'pageview');
     <div class="widget-wrap widget-list">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">4</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">4</span></li></ul>
         </div>
     </div>
 
@@ -467,7 +358,7 @@ ga('send', 'pageview');
                 <h1 class="logo-wrap">
                     <a href="/" class="logo"></a>
                 </h1>
-                <p>&copy; 2018 noizbuster</p>
+                <p>&copy; 2019 noizbuster</p>
                 <p>Powered by <a href="//hexo.io/" target="_blank">Hexo</a>. Theme by <a href="//github.com/ppoffice" target="_blank">PPOffice</a></p>
             </div>
         </div>
@@ -479,13 +370,11 @@ ga('send', 'pageview');
     var disqus_shortname = 'noizbuster';
     
     
-    var disqus_url = 'http://noizbuster.com/2018/11/22/2016-08-18-093029-docker-swarm-study/2016-08-18-093029-docker-swarm-study/';
-    
     (function() {
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
     </script>
